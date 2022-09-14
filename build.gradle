@@ -2,7 +2,7 @@ buildscript {
     ext {
         compose_version = '1.2.0'
 //        lifecycle_version = "2.5.1"
-//        room_version = "2.4.3"
+        room_version = "2.4.3"
 //        navigation_compose_version = "2.5.1"
 //        coroutine_version = "1.6.3"
     }
