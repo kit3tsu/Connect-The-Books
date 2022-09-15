@@ -13,5 +13,5 @@ data class DirectorySNote(
         entityColumn = "note_directory"
     )
     val notes: List<Note>
-) {}
+)
 

@@ -8,23 +8,20 @@ import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface DirectoryDao {
+interface DirectoryDao : BaseDao<Directory> {
 
     @Query("SELECT * FROM Directory")
-    fun findAll() : Flow<List<Directory>>
+    fun findAll(): Flow<List<Directory>>
 
     @Query("SELECT * FROM Directory where directory_id = :id")
-    fun findById(id:Int) : Flow<Directory>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun  insert(value: Directory)
+    fun findById(id: Int): Flow<Directory>
 
     @Transaction
     @Query("SELECT * FROM Directory")
-    fun findSubDirectory():Flow<List<DirectorySubDirectory>>
+    fun findSubDirectory(): Flow<List<DirectorySubDirectory>>
 
     @Transaction
     @Query("SELECT * FROM Directory")
-    fun findDirectorySNote():Flow<List<DirectorySNote>>
+    fun findDirectorySNote(): Flow<List<DirectorySNote>>
 
 }

@@ -7,18 +7,15 @@ import be.bf.kit3tsu.connect_the_books.data.relations.TagSNote
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TagDao  {
+interface TagDao : BaseDao<Tag> {
 
     @Query("SELECT * FROM Tag")
-    fun findAll() : Flow<List<Tag>>
+    fun findAll(): Flow<List<Tag>>
 
     @Query("SELECT * FROM Tag WHERE tag_id = :id")
-    fun findById(id : Int) : Flow<Tag>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun  insert(value: Tag )
+    fun findById(id: Int): Flow<Tag>
 
     @Transaction
     @Query("SELECT * FROM Tag")
-    fun findNotes():Flow<List<TagSNote>>
+    fun findNotes(): Flow<List<TagSNote>>
 }

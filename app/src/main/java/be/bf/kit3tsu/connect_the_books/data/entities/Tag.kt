@@ -7,13 +7,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Tag")
 data class Tag @Ignore constructor(
-    @ColumnInfo(name = "tag_Name")
-    var name: String
-){
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "tag_id")
-    var tagId : Int = -1
-    constructor(tagId:Int,name: String) : this(name){
-        this.tagId = tagId
-    }
-}
+    var tagId: Int = -1,
+    @ColumnInfo(name = "tag_Name")
+    var name: String
+)

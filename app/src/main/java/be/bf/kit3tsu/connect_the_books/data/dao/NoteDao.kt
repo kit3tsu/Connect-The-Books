@@ -8,18 +8,15 @@ import com.example.tfe.data.entity.Book
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface NoteDao  {
+interface NoteDao : BaseDao<Note> {
     @Query("Select * from Note")
-    fun findAll() : Flow<List<Note>>
+    fun findAll(): Flow<List<Note>>
 
     @Query("SELECT * FROM Note WHERE note_id = :id")
     fun findOneById(id: Int): Flow<Note>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun  insert(value: Note )
-
     @Transaction
     @Query("SELECT * FROM Note")
-    fun fingTags():Flow<List<NoteSTag>>
+    fun findTags(): Flow<List<NoteSTag>>
 
 }

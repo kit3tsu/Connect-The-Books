@@ -8,7 +8,9 @@ import be.bf.kit3tsu.connect_the_books.util.Visibility
 
 @Entity(tableName = "Directory")
 data class Directory @Ignore constructor(
-    @ColumnInfo(name = "directory_name")
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "directory_id")
+    var directoryId: Int = -1, @ColumnInfo(name = "directory_name")
     var name: String,
     @ColumnInfo(name = "directory_path")
     var path: String,
@@ -18,19 +20,4 @@ data class Directory @Ignore constructor(
     var visibility: Visibility,
     @ColumnInfo(name = "directory_parent")
     var parentDirectory: Int?
-) {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "directory_id")
-    var directoryId: Int = -1
-
-    constructor(
-        directoryId: Int,
-        name: String,
-        path: String,
-        imgSrc: String,
-        visibility: Visibility,
-        parentDirectory: Int?
-    ) : this(name, path, imgSrc, visibility, parentDirectory) {
-        this.directoryId = directoryId
-    }
-}
+)

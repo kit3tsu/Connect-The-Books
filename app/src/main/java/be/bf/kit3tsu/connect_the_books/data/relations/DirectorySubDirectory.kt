@@ -4,12 +4,12 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
 
-data class DirectorySubDirectory (
+data class DirectorySubDirectory(
     @Embedded
     val directory: Directory,
-@Relation(
-    parentColumn = "directory_id",
-    entityColumn = "directory_parent"
+    @Relation(
+        parentColumn = "directory_id",
+        entityColumn = "directory_parent"
+    )
+    val subDirectory: List<Directory>
 )
-val subDirectory : List<Directory>
-){}

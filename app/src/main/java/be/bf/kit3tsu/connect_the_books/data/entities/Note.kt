@@ -7,27 +7,18 @@ import androidx.room.PrimaryKey
 import be.bf.kit3tsu.connect_the_books.util.Visibility
 
 @Entity(tableName = "Note")
-data class Note constructor (
+data class Note constructor(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "note_id")
+    var noteId: Int? = null,
     @ColumnInfo(name = "note_name")
-    var name:String,
+    var name: String,
     @ColumnInfo(name = "note_description")
     var description: String,
     @ColumnInfo(name = "note_path")
     var path: String,
     @ColumnInfo(name = "note_visibility")
     var visibility: Visibility,
-    @ColumnInfo(name= "note_directory")
-    var parentDirectory : Int,
-
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "note_id")
-    var noteId: Int? = null,
-) {}
-//{
-//
-//    constructor(noteId: Int, name: String, description: String, path: String,visibility: Visibility,parentDirectory: Int,content: String) :
-//            this(name, description, path,visibility,parentDirectory) {
-//        this.noteId =noteId
-//        this.content = content
-//    }
-//}
+    @ColumnInfo(name = "note_directory")
+    var parentDirectory: Int
+)
