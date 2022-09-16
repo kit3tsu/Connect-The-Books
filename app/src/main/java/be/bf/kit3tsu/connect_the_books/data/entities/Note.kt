@@ -2,7 +2,6 @@ package be.bf.kit3tsu.connect_the_books.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import be.bf.kit3tsu.connect_the_books.util.Visibility
 

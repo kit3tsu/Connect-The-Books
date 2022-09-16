@@ -11,7 +11,7 @@ import be.bf.kit3tsu.connect_the_books.data.entities.Directory
         childColumns = arrayOf("book_directory")
     )]
 )
-data class Book @Ignore constructor(
+data class Book constructor(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "book_id")
     var bookId: Int = -1,
@@ -23,4 +23,4 @@ data class Book @Ignore constructor(
     var isbn: String,
     @ColumnInfo(name = "book_directory")
     var directory: Int
-)
+){}

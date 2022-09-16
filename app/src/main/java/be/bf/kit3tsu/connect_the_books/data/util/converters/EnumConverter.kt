@@ -3,7 +3,6 @@ package be.bf.kit3tsu.connect_the_books.data.util.converters
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.TypeConverter
-import be.bf.kit3tsu.connect_the_books.data.entities.Tag
 import be.bf.kit3tsu.connect_the_books.util.Visibility
 
 class EnumConverter {
