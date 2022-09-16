@@ -6,7 +6,7 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Tag")
-data class Tag @Ignore constructor(
+data class Tag constructor(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "tag_id")
     var tagId: Int = -1,

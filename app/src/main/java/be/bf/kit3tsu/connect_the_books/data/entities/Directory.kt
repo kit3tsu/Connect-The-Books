@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import be.bf.kit3tsu.connect_the_books.util.Visibility
 
 @Entity(tableName = "Directory")
-data class Directory @Ignore constructor(
+data class Directory constructor(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "directory_id")
     var directoryId: Int = -1, @ColumnInfo(name = "directory_name")
