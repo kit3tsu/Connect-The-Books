@@ -12,10 +12,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import be.bf.kit3tsu.connect_the_books.ui.library.directory.FolderScreen
+import be.bf.kit3tsu.connect_the_books.ui.library.notes
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
 import dev.jeziellago.compose.markdowntext.MarkdownText
 
@@ -30,9 +33,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Column() {
-                        Greeting("Android")
-                        ComplexExampleContent()
-                        MinimalExampleContent()
+                        FolderScreen(notes)
+//                        Greeting("Android")
+//                        ComplexExampleContent()
+//                        MinimalExampleContent()
                     }
                 }
             }

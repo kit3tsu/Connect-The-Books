@@ -4,7 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import be.bf.kit3tsu.connect_the_books.util.Visibility
+import be.bf.kit3tsu.connect_the_books.data.util.Visibility
+
 
 @Entity(tableName = "Directory")
 data class Directory constructor(

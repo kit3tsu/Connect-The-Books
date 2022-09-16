@@ -3,7 +3,7 @@ package be.bf.kit3tsu.connect_the_books.data.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import be.bf.kit3tsu.connect_the_books.util.Visibility
+import be.bf.kit3tsu.connect_the_books.data.util.Visibility
 
 @Entity(tableName = "Note")
 data class Note constructor(
