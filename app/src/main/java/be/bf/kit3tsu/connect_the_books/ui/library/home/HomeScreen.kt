@@ -24,8 +24,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import be.bf.kit3tsu.connect_the_books.R
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
+import be.bf.kit3tsu.connect_the_books.ui.library.books
 import be.bf.kit3tsu.connect_the_books.ui.library.folders
 import coil.compose.rememberAsyncImagePainter
+import com.example.tfe.data.entity.Book
 
 @Composable
 fun HomeScreen() {
@@ -51,8 +53,8 @@ fun FolderCarousel() {
         contentPadding = PaddingValues(all = 2.5.dp),
         modifier = Modifier.height(150.dp)
     ) {
-        items(items = folders) { item ->
-            FolderItem(item) // FIXME
+        items(items = books) { item ->
+            BookItem(item) // FIXME
         }
     }
 }
@@ -86,20 +88,36 @@ fun FolderItem(
 
     }
 
+}
 
-//    BoxWithConstraints(
-//        contentAlignment = Alignment.CenterStart,
-//        modifier = modifier
-//            .padding(start = 15.dp, end = 15.dp, bottom = 15.dp, top = 15.dp)
-//            .clickable { } // TODO navigate to note detail
-//            .clip(RoundedCornerShape(10.dp))
-//            .background(color = Color.Cyan)
-//            .aspectRatio(1f, matchHeightConstraintsFirst = true)
-//            .size(height = 10.dp, width = 10.dp),
-//    ) {
-//        Text(text = item.name, modifier = Modifier.align(Alignment.TopStart))
-//        Text(text = item.path,Modifier.align(Alignment.CenterStart))
-//    }
+@Composable
+fun BookItem(
+    item: Book,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .padding(all = 5.dp)
+            .aspectRatio(1f, matchHeightConstraintsFirst = true),
+        shape = MaterialTheme.shapes.medium,
+        backgroundColor = Color.Cyan,
+        elevation = 2.dp
+    ) {
+        Row() {
+            BookImage(// FIXME define the image dimension
+                image = rememberAsyncImagePainter("https://edit.org/photos/images/cat/book-covers-big-2019101610.jpg-1300.jpg"),
+                modifier = Modifier
+                    .size(75.dp)
+                    .weight(3f)
+            )
+            Column() {
+                Text(text = item.title)
+                Text(text = item.authors)
+            }
+        }
+
+
+    }
 }
 
 @Composable
@@ -127,7 +145,7 @@ fun MyBottomAppBar() {
 
 @Composable
 fun BookSearch() {
-    TODO("Not yet implemented")
+    //TODO("Not yet implemented")
 }
 
 @Composable
@@ -151,10 +169,25 @@ fun HomeButton() {
 
 @Composable
 fun NewFolderButton() {
-    TODO("Not yet implemented")
+    // TODO("Not yet implemented")
 }
 
 @Composable
 fun NewNoteButton() {
-    TODO("Not yet implemented")
+//    TODO("Not yet implemented")
 }
+
+
+//    BoxWithConstraints(
+//        contentAlignment = Alignment.CenterStart,
+//        modifier = modifier
+//            .padding(start = 15.dp, end = 15.dp, bottom = 15.dp, top = 15.dp)
+//            .clickable { } // TODO navigate to note detail
+//            .clip(RoundedCornerShape(10.dp))
+//            .background(color = Color.Cyan)
+//            .aspectRatio(1f, matchHeightConstraintsFirst = true)
+//            .size(height = 10.dp, width = 10.dp),
+//    ) {
+//        Text(text = item.name, modifier = Modifier.align(Alignment.TopStart))
+//        Text(text = item.path,Modifier.align(Alignment.CenterStart))
+//    }
