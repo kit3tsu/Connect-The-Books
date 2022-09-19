@@ -5,7 +5,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Surface
@@ -38,26 +40,30 @@ fun HomeScreen() {
 
 @Composable
 fun FolderCarousel() {
-    LazyVerticalGrid(columns = GridCells.Fixed(1), contentPadding = PaddingValues(all = 10.dp)) {
-        items(folders.size) { item->
-            FolderItem(item) // FIXME
+    LazyHorizontalGrid(rows = GridCells.Fixed(1), contentPadding = PaddingValues(all = 2.5.dp),modifier = Modifier.height(200.dp)) {
+        items(items = folders) { item ->
+            FolderItem(item ) // FIXME
         }
     }
 }
 
 @Composable
-fun FolderItem(item : Directory) {
+fun FolderItem(
+    item: Directory,
+    modifier: Modifier = Modifier
+) {
     BoxWithConstraints(
         contentAlignment = Alignment.CenterStart,
-        modifier = Modifier
-            .padding(start = 15.dp, end = 15.dp, bottom = 15.dp)
+        modifier = modifier
+            .padding(start = 15.dp, end = 15.dp, bottom = 15.dp, top = 15.dp)
             .clickable { } // TODO navigate to note detail
             .clip(RoundedCornerShape(10.dp))
             .background(color = Color.Cyan)
-            .aspectRatio(1f),
-        ){
-            Text(text = item.name, modifier = Modifier.align(Alignment.TopStart))
-            //Text(text = item.path,Modifier.align(Alignment.CenterStart))
+            .aspectRatio(1f, matchHeightConstraintsFirst = true)
+            .size(height = 10.dp, width = 10.dp),
+    ) {
+        Text(text = item.name, modifier = Modifier.align(Alignment.TopStart))
+        Text(text = item.path,Modifier.align(Alignment.CenterStart))
     }
 }
 
