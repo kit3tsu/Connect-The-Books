@@ -17,7 +17,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import be.bf.kit3tsu.connect_the_books.ui.library.books
 import be.bf.kit3tsu.connect_the_books.ui.library.directory.FolderScreen
+import be.bf.kit3tsu.connect_the_books.ui.library.home.HomeScreen
 import be.bf.kit3tsu.connect_the_books.ui.library.notes
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
 import dev.jeziellago.compose.markdowntext.MarkdownText
@@ -32,8 +34,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column() {
-                        FolderScreen(notes)
+                    Column {
+                        //FolderScreen(notes)
+                        HomeScreen()
 //                        Greeting("Android")
 //                        ComplexExampleContent()
 //                        MinimalExampleContent()
