@@ -60,7 +60,10 @@ fun NotePreview(note: Note) {
             .fillMaxWidth(0.9f),
 
     ){
-        Column() {
+        Column(
+            verticalArrangement = Arrangement.SpaceAround,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Text(text = note.name)
             Text(text = note.description)
         }

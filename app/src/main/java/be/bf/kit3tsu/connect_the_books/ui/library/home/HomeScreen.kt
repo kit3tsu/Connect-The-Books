@@ -72,14 +72,20 @@ fun FolderItem(
         backgroundColor = Color.Cyan,
         elevation = 2.dp
     ) {
-        Row() {
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             BookImage(// FIXME define the image dimension
                 image = rememberAsyncImagePainter("https://edit.org/photos/images/cat/book-covers-big-2019101610.jpg-1300.jpg"),
                 modifier = Modifier
                     .size(75.dp)
                     .weight(3f)
             )
-            Column() {
+            Column(
+                verticalArrangement = Arrangement.SpaceAround,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
                 Text(text = item.name)
                 Text(text = item.path)
             }
@@ -103,14 +109,20 @@ fun BookItem(
         backgroundColor = Color.Cyan,
         elevation = 2.dp
     ) {
-        Row() {
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             BookImage(// FIXME define the image dimension
                 image = rememberAsyncImagePainter("https://edit.org/photos/images/cat/book-covers-big-2019101610.jpg-1300.jpg"),
                 modifier = Modifier
                     .size(75.dp)
                     .weight(3f)
             )
-            Column() {
+            Column(
+                verticalArrangement = Arrangement.SpaceAround,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
                 Text(text = item.title)
                 Text(text = item.authors)
             }
