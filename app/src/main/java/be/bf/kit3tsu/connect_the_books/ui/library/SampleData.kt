@@ -28,6 +28,8 @@ val books = arrayOf(
     Book(6,"One Piece Tome 6", "Eichiro Oda", "none",0),
 )
 
+
+
 val notes = arrayOf(
     Note(1,"Les Pirates","Ils sont tres tres méchant","/c/docu/app", Visibility.PUBLIC,1),
     Note(2,"Les Marines","Ils sont encore plus méchant","/c/docu/app", Visibility.PUBLIC,1),

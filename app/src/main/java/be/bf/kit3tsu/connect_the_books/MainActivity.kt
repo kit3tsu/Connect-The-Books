@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import be.bf.kit3tsu.connect_the_books.ui.library.books
 import be.bf.kit3tsu.connect_the_books.ui.library.directory.FolderScreen
+import be.bf.kit3tsu.connect_the_books.ui.library.folders
 import be.bf.kit3tsu.connect_the_books.ui.library.home.HomeScreen
 import be.bf.kit3tsu.connect_the_books.ui.library.notes
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Column {
                         //FolderScreen(notes)
-                        HomeScreen()
+                        HomeScreen(folders,{},{},{})
 //                        Greeting("Android")
 //                        ComplexExampleContent()
 //                        MinimalExampleContent()

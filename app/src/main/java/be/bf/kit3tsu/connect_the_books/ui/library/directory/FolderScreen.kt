@@ -19,7 +19,9 @@ import androidx.compose.ui.unit.dp
 import be.bf.kit3tsu.connect_the_books.ComplexExampleContent
 import be.bf.kit3tsu.connect_the_books.Greeting
 import be.bf.kit3tsu.connect_the_books.MinimalExampleContent
+import be.bf.kit3tsu.connect_the_books.data.entities.Directory
 import be.bf.kit3tsu.connect_the_books.data.entities.Note
+import be.bf.kit3tsu.connect_the_books.ui.library.folders
 import be.bf.kit3tsu.connect_the_books.ui.library.home.FolderCarousel
 import be.bf.kit3tsu.connect_the_books.ui.library.home.MyBottomAppBar
 import be.bf.kit3tsu.connect_the_books.ui.library.notes
@@ -27,13 +29,16 @@ import be.bf.kit3tsu.connect_the_books.ui.library.oneNote
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
 
 @Composable
-fun FolderScreen(noteList: Array<Note>) {
+fun FolderScreen(
+    noteList: Array<Note>,
+    subFolder: Array<Directory>
+) {
     Surface() {
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            FolderCarousel()
+            FolderCarousel(subFolder)
             LazyColumn(
                 contentPadding = PaddingValues(start = 8.dp,end = 8.dp, bottom = 75.dp),
                  modifier = Modifier.height(400.dp)) {
@@ -57,8 +62,7 @@ fun NotePreview(note: Note) {
             .clickable { } // TODO navigate to note detail
             .clip(RoundedCornerShape(10.dp))
             .background(color = Color.Cyan)
-            .fillMaxWidth(0.9f),
-
+            .fillMaxWidth(0.9f)
     ){
         Column(
             verticalArrangement = Arrangement.SpaceAround,
@@ -85,7 +89,7 @@ fun NotePreviewPreview() {
 fun FolderScreenPreview() {
     ConnectTheBooksTheme {
         Column() {
-            FolderScreen(notes)
+            FolderScreen(notes, folders)
         }
     }
 }
