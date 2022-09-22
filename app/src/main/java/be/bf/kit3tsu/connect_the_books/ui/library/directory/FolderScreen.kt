@@ -26,7 +26,7 @@ import be.bf.kit3tsu.connect_the_books.ui.library.home.FolderCarousel
 import be.bf.kit3tsu.connect_the_books.ui.library.home.MyBottomAppBar
 import be.bf.kit3tsu.connect_the_books.ui.library.notes
 import be.bf.kit3tsu.connect_the_books.ui.library.oneNote
-import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
+import be.bf.kit3tsu.connect_the_books.ui.theme.AppTheme
 
 @Composable
 fun FolderScreen(
@@ -77,7 +77,7 @@ fun NotePreview(note: Note) {
 @Preview(showBackground = true)
 @Composable
 fun NotePreviewPreview() {
-    ConnectTheBooksTheme {
+    AppTheme() {
         Column() {
             NotePreview(oneNote)
         }
@@ -87,7 +87,7 @@ fun NotePreviewPreview() {
 @Preview(showBackground = true)
 @Composable
 fun FolderScreenPreview() {
-    ConnectTheBooksTheme {
+    AppTheme {
         Column() {
             FolderScreen(notes, folders)
         }

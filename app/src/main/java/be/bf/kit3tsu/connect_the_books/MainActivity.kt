@@ -6,10 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.modifier.modifierLocalOf
@@ -22,6 +19,7 @@ import be.bf.kit3tsu.connect_the_books.ui.library.directory.FolderScreen
 import be.bf.kit3tsu.connect_the_books.ui.library.folders
 import be.bf.kit3tsu.connect_the_books.ui.library.home.HomeScreen
 import be.bf.kit3tsu.connect_the_books.ui.library.notes
+import be.bf.kit3tsu.connect_the_books.ui.theme.AppTheme
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
 import dev.jeziellago.compose.markdowntext.MarkdownText
 
@@ -33,7 +31,8 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colors.surface,
+                    contentColor = contentColorFor(MaterialTheme.colors.surface),
                 ) {
                     Column {
                         //FolderScreen(notes)
@@ -85,7 +84,7 @@ fun ComplexExampleContent() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    ConnectTheBooksTheme {
+    AppTheme() {
         Column() {
             Greeting("Android")
             MinimalExampleContent()
