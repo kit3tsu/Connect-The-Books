@@ -1,7 +1,9 @@
 package be.bf.kit3tsu.connect_the_books.ui.library.home
 
 import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -21,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
 import be.bf.kit3tsu.connect_the_books.ui.library.books
 import be.bf.kit3tsu.connect_the_books.ui.library.folders
+import be.bf.kit3tsu.connect_the_books.ui.library.oneBook
+import be.bf.kit3tsu.connect_the_books.ui.library.oneDirectory
 import be.bf.kit3tsu.connect_the_books.ui.theme.AppButton
 import be.bf.kit3tsu.connect_the_books.ui.theme.AppSearchBar
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
@@ -69,6 +73,7 @@ fun FolderCarousel(
         }
     }
 }
+
 @Composable
 fun BookCarousel(
     books: Array<Book>
@@ -83,6 +88,7 @@ fun BookCarousel(
         }
     }
 }
+
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FolderItem(
@@ -91,36 +97,32 @@ fun FolderItem(
 ) {
     Card(
         modifier = modifier
-            .padding(all = 5.dp)
-            .aspectRatio(1f, matchHeightConstraintsFirst = true)
+            .padding(all = 6.dp)
+            .aspectRatio(1.25f, matchHeightConstraintsFirst = true)
             .clickable { },// TODO Add navigation
-        shape = MaterialTheme.shapes.large,
+        shape = MaterialTheme.shapes.medium,
         backgroundColor = MaterialTheme.colors.primary,
         elevation = 2.dp,
 
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
         ) {
-            BookImage(// FIXME define the image dimension
-                image = rememberAsyncImagePainter("https://edit.org/photos/images/cat/book-covers-big-2019101610.jpg-1300.jpg"),
-                modifier = Modifier
-                    .size(75.dp)
-                    .weight(3f)
-            )
+        Column(
+            verticalArrangement = Arrangement.SpaceAround,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = item.name, style = MaterialTheme.typography.h6)
+            Divider(thickness = 2.dp, color = MaterialTheme.colors.onPrimary)
+
             Column(
                 verticalArrangement = Arrangement.SpaceAround,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(text = item.name)
+                Text(text = "Nb Note = 12")
+                Text(text = "Nb Note = 10")
+                Text(text = "Nb Note = 3")
                 Text(text = item.path)
             }
         }
-
-
     }
-
 }
 
 @Composable
@@ -131,15 +133,16 @@ fun BookItem(
     Card(
         modifier = modifier
             .padding(all = 5.dp)
-            .aspectRatio(1f, matchHeightConstraintsFirst = true)
+            .aspectRatio(0.8f, matchHeightConstraintsFirst = true)
+            .height(150.dp)
             .clickable { },// TODO Add navigation,
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.primaryVariant,
         elevation = 2.dp
     ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
+        Column(
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             BookImage(// FIXME define the image dimension
                 image = rememberAsyncImagePainter("https://edit.org/photos/images/cat/book-covers-big-2019101610.jpg-1300.jpg"),
@@ -147,16 +150,19 @@ fun BookItem(
                     .size(75.dp)
                     .weight(3f)
             )
-            Column(
-                verticalArrangement = Arrangement.SpaceAround,
-                horizontalAlignment = Alignment.CenterHorizontally,
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = item.title)
-                Text(text = item.authors)
+                Column(
+                    verticalArrangement = Arrangement.SpaceAround,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(text = item.title, style = MaterialTheme.typography.caption)
+                    Text(text = item.authors, style = MaterialTheme.typography.caption)
+                }
             }
         }
-
-
     }
 }
 
@@ -169,21 +175,20 @@ fun BookImage(
         painter = image,
         contentDescription = null,
         modifier
-            .aspectRatio(1f)
-            .padding(3.dp)
-            .size(150.dp),
+            .aspectRatio(0.8f)
+            .padding(0.dp)
+            .size(100.dp)
+            .border(BorderStroke(1.dp, color = MaterialTheme.colors.onPrimary)),
         contentScale = ContentScale.Fit
     )
 }
 
 
-
 @Composable
 fun BookSearch(onSearchBook: () -> Unit) {
     val (text, onTextChange) = rememberSaveable { mutableStateOf("") }
-    AppSearchBar(onSearchBook,text,onTextChange)
+    AppSearchBar(onSearchBook, text, onTextChange)
 }
-
 
 
 @Composable
@@ -196,26 +201,26 @@ fun HomeButton(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
-            Modifier.padding(8.dp).fillMaxWidth(),
+            Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
             NewNoteButton(onNewNote)
             NewFolderButton(onNewFolder)
         }
-
-
     }
 }
 
 @Composable
 fun NewFolderButton(onNewFolder: () -> Unit) {
-    AppButton(onClickAction = onNewFolder, text = "Add New Folded" )
+    AppButton(onClickAction = onNewFolder, text = "Add New Folded")
 }
 
 @Composable
 fun NewNoteButton(onNewNote: () -> Unit) {
-AppButton(onClickAction = onNewNote, text = "Add New Note")
+    AppButton(onClickAction = onNewNote, text = "Add New Note")
 }
 
 
@@ -233,11 +238,11 @@ AppButton(onClickAction = onNewNote, text = "Add New Note")
 //        Text(text = item.path,Modifier.align(Alignment.CenterStart))
 //    }
 
- @Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun Preview() {
+fun PreviewHomeScreen() {
     ConnectTheBooksTheme {
-        HomeScreen(directory = folders, onNewFolder = {  }, onNewNote = {  },{})
+        HomeScreen(directory = folders, onNewFolder = { }, onNewNote = { }, {})
     }
 }
 
@@ -248,8 +253,50 @@ fun Preview() {
     name = "DefaultPreviewDark"
 )
 @Composable
-fun PreviewnDark() {
+fun PreviewDarkHomeScreen() {
     ConnectTheBooksTheme {
-        HomeScreen(directory = folders, onNewFolder = {  }, onNewNote = {  },{})
+        HomeScreen(directory = folders, onNewFolder = { }, onNewNote = { }, {})
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewFolderItem() {
+    ConnectTheBooksTheme {
+        FolderItem(item = oneDirectory)
+    }
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "DefaultPreviewDark"
+)
+@Composable
+fun PreviewDarkFolderItem() {
+    ConnectTheBooksTheme {
+        FolderItem(item = oneDirectory)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewBookItem() {
+    ConnectTheBooksTheme {
+        BookItem(item = oneBook)
+    }
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "DefaultPreviewDark"
+)
+@Composable
+fun PreviewDarkBookItem() {
+    ConnectTheBooksTheme {
+        BookItem(item = oneBook)
     }
 }

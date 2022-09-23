@@ -27,7 +27,7 @@ fun AppButton(onClickAction: () -> Unit, text: String) {
     Button(
         onClick = { onClickAction },
         modifier = Modifier,
-        shape = MaterialTheme.shapes.large,
+        shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
         contentPadding = PaddingValues(8.dp),
     ) {

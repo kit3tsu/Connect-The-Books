@@ -12,7 +12,11 @@ val Shapes = Shapes(
 )
 
 val ConnectTheBooksShapes = Shapes(
-small = CutCornerShape(topStart = 8.dp),
-medium = CutCornerShape(topStart = 24.dp),
-large = RoundedCornerShape(8.dp)
+small = RoundedCornerShape( 8.dp),
+medium = CutCornerShape(topStart = 8.dp,
+    topEnd = 8.dp,
+    bottomEnd = 8.dp,
+    bottomStart = 8.dp),
+large = RoundedCornerShape(topStart = 12.dp)
 )
+

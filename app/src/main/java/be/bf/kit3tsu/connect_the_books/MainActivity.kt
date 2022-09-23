@@ -35,8 +35,8 @@ class MainActivity : ComponentActivity() {
                     contentColor = contentColorFor(MaterialTheme.colors.surface),
                 ) {
                     Column {
-                        //FolderScreen(notes)
-                        HomeScreen(folders,{},{},{})
+                        FolderScreen(notes, folders)
+                       // HomeScreen(folders,{},{},{})
 //                        Greeting("Android")
 //                        ComplexExampleContent()
 //                        MinimalExampleContent()

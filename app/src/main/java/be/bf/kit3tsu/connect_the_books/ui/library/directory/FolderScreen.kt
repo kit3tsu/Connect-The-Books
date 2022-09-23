@@ -5,8 +5,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomAppBar
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +28,7 @@ import be.bf.kit3tsu.connect_the_books.ui.library.home.FolderCarousel
 import be.bf.kit3tsu.connect_the_books.ui.library.notes
 import be.bf.kit3tsu.connect_the_books.ui.library.oneNote
 import be.bf.kit3tsu.connect_the_books.ui.theme.AppTheme
+import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
 
 @Composable
 fun FolderScreen(
@@ -39,8 +42,8 @@ fun FolderScreen(
         ) {
             FolderCarousel(subFolder)
             LazyColumn(
-                contentPadding = PaddingValues(start = 8.dp,end = 8.dp, bottom = 75.dp),
-                 modifier = Modifier.height(400.dp)) {
+                contentPadding = PaddingValues(start = 8.dp,end = 8.dp),
+                 modifier = Modifier.height(360.dp)) {
                 items(items = noteList) { note ->
                     NotePreview(note = note)
                 }
@@ -59,16 +62,17 @@ fun NotePreview(note: Note) {
         modifier = Modifier
             .padding(start = 15.dp, end = 15.dp, bottom = 15.dp)
             .clickable { } // TODO navigate to note detail
-            .clip(RoundedCornerShape(10.dp))
-            .background(color = Color.Cyan)
+            .clip(CutCornerShape(topStart = 12.dp))
+            .background(color = MaterialTheme.colors.primaryVariant)
             .fillMaxWidth(0.9f)
     ){
         Column(
             verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth(1f)
         ) {
-            Text(text = note.name)
-            Text(text = note.description)
+            Text(text = note.name, style = MaterialTheme.typography.subtitle1)
+            Text(text = note.description, style = MaterialTheme.typography.body2)
         }
     }
 }
@@ -76,7 +80,7 @@ fun NotePreview(note: Note) {
 @Preview(showBackground = true)
 @Composable
 fun NotePreviewPreview() {
-    AppTheme() {
+    ConnectTheBooksTheme() {
         Column() {
             NotePreview(oneNote)
         }
@@ -86,7 +90,7 @@ fun NotePreviewPreview() {
 @Preview(showBackground = true)
 @Composable
 fun FolderScreenPreview() {
-    AppTheme {
+    ConnectTheBooksTheme {
         Column() {
             FolderScreen(notes, folders)
         }
