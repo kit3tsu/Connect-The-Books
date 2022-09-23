@@ -23,7 +23,6 @@ import be.bf.kit3tsu.connect_the_books.data.entities.Directory
 import be.bf.kit3tsu.connect_the_books.data.entities.Note
 import be.bf.kit3tsu.connect_the_books.ui.library.folders
 import be.bf.kit3tsu.connect_the_books.ui.library.home.FolderCarousel
-import be.bf.kit3tsu.connect_the_books.ui.library.home.MyBottomAppBar
 import be.bf.kit3tsu.connect_the_books.ui.library.notes
 import be.bf.kit3tsu.connect_the_books.ui.library.oneNote
 import be.bf.kit3tsu.connect_the_books.ui.theme.AppTheme

@@ -1,5 +1,6 @@
 package be.bf.kit3tsu.connect_the_books.ui.library.home
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -8,35 +9,44 @@ import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
 import be.bf.kit3tsu.connect_the_books.ui.library.books
+import be.bf.kit3tsu.connect_the_books.ui.library.folders
+import be.bf.kit3tsu.connect_the_books.ui.theme.AppButton
+import be.bf.kit3tsu.connect_the_books.ui.theme.AppSearchBar
+import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
+import be.bf.kit3tsu.connect_the_books.ui.theme.MyBottomAppBar
 import coil.compose.rememberAsyncImagePainter
 import com.example.tfe.data.entity.Book
 
 @Composable
 fun HomeScreen(
     directory: Array<Directory>,
-    onNewFolder: (Book) -> Unit,
-    onNewNote: (Book) -> Unit,
-    onSearchBook: (Book) -> Unit
+    onNewFolder: () -> Unit,
+    onNewNote: () -> Unit,
+    onSearchBook: () -> Unit
 ) {
     Surface(
-        Modifier.fillMaxSize()
+        Modifier.fillMaxSize(),
         // TODO Define here Personal and Material view design
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            BookSearch(onSearchBook)
             FolderCarousel(directory)
+            BookCarousel(books)
             HomeButton(
-                onSearchBook,
                 onNewFolder,
                 onNewNote
             )
@@ -59,7 +69,20 @@ fun FolderCarousel(
         }
     }
 }
-
+@Composable
+fun BookCarousel(
+    books: Array<Book>
+) {
+    LazyHorizontalGrid(
+        rows = GridCells.Fixed(1),
+        contentPadding = PaddingValues(all = 2.5.dp),
+        modifier = Modifier.height(150.dp)
+    ) {
+        items(items = books) { item ->
+            BookItem(item = item)
+        }
+    }
+}
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FolderItem(
@@ -70,9 +93,9 @@ fun FolderItem(
         modifier = modifier
             .padding(all = 5.dp)
             .aspectRatio(1f, matchHeightConstraintsFirst = true)
-            .clickable {  },// TODO Add navigation
-        shape = MaterialTheme.shapes.medium,
-        backgroundColor = Color.Cyan,
+            .clickable { },// TODO Add navigation
+        shape = MaterialTheme.shapes.large,
+        backgroundColor = MaterialTheme.colors.primary,
         elevation = 2.dp,
 
     ) {
@@ -109,9 +132,9 @@ fun BookItem(
         modifier = modifier
             .padding(all = 5.dp)
             .aspectRatio(1f, matchHeightConstraintsFirst = true)
-            .clickable {  },// TODO Add navigation,
-        shape = MaterialTheme.shapes.medium,
-        backgroundColor = Color.Cyan,
+            .clickable { },// TODO Add navigation,
+        shape = MaterialTheme.shapes.large,
+        backgroundColor = MaterialTheme.colors.primaryVariant,
         elevation = 2.dp
     ) {
         Row(
@@ -153,49 +176,46 @@ fun BookImage(
     )
 }
 
-@Composable
-fun MyBottomAppBar() {
-    BottomAppBar() {
 
-    }
-}
 
 @Composable
-fun BookSearch(onSearchBook: (Book) -> Unit) {
-    //TODO("Not yet implemented")
+fun BookSearch(onSearchBook: () -> Unit) {
+    val (text, onTextChange) = rememberSaveable { mutableStateOf("") }
+    AppSearchBar(onSearchBook,text,onTextChange)
 }
+
+
 
 @Composable
 fun HomeButton(
-    onSearchBook: (Book) -> Unit,
-    onNewFolder: (Book) -> Unit,
-    onNewNote: (Book) -> Unit
+    onNewFolder: () -> Unit,
+    onNewNote: () -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
-            Modifier.padding(8.dp),
+            Modifier.padding(8.dp).fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
             NewNoteButton(onNewNote)
             NewFolderButton(onNewFolder)
         }
-        BookSearch(onSearchBook)
+
 
     }
 }
 
 @Composable
-fun NewFolderButton(onNewFolder: (Book) -> Unit) {
-    // TODO("Not yet implemented")
+fun NewFolderButton(onNewFolder: () -> Unit) {
+    AppButton(onClickAction = onNewFolder, text = "Add New Folded" )
 }
 
 @Composable
-fun NewNoteButton(onNewNote: (Book) -> Unit) {
-//    TODO("Not yet implemented")
+fun NewNoteButton(onNewNote: () -> Unit) {
+AppButton(onClickAction = onNewNote, text = "Add New Note")
 }
 
 
@@ -212,3 +232,24 @@ fun NewNoteButton(onNewNote: (Book) -> Unit) {
 //        Text(text = item.name, modifier = Modifier.align(Alignment.TopStart))
 //        Text(text = item.path,Modifier.align(Alignment.CenterStart))
 //    }
+
+ @Preview(showBackground = true)
+@Composable
+fun Preview() {
+    ConnectTheBooksTheme {
+        HomeScreen(directory = folders, onNewFolder = {  }, onNewNote = {  },{})
+    }
+}
+
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "DefaultPreviewDark"
+)
+@Composable
+fun PreviewnDark() {
+    ConnectTheBooksTheme {
+        HomeScreen(directory = folders, onNewFolder = {  }, onNewNote = {  },{})
+    }
+}

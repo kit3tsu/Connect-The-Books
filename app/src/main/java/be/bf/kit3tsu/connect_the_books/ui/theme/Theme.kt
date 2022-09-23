@@ -7,13 +7,13 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val DarkColorPalette = darkColors(
+val DarkColorPalette = darkColors(
     primary = Purple200,
     primaryVariant = Purple700,
     secondary = Teal200
 )
 
-private val LightColorPalette = lightColors(
+val LightColorPalette = lightColors(
     primary = Purple500,
     primaryVariant = Purple700,
     secondary = Teal200
@@ -28,21 +28,35 @@ private val LightColorPalette = lightColors(
     onSurface = Color.Black,
     */
 )
-private val LightColors = lightColors(
-    primary = Red700,
-    primaryVariant = Red900,
-    onPrimary = Color.White,
-    secondary = Red700,
-    secondaryVariant = Red900,
-    onSecondary = Color.White,
+val LightColors = lightColors(
+    primary = CariolinaBlue,
+    primaryVariant = GreenBlueCrayola,
+    onPrimary = Xiketic,
+    secondary = OrangeRedCrayola,
+    secondaryVariant = Red,
+    onSecondary = Xiketic,
+    surface = UranianBlue,
+    onSurface = XiketicDarker,
     error = Red800
 )
-private val DarkColors = darkColors(
-    primary = Red300,
-    primaryVariant = Red700,
-    onPrimary = Color.Black,
-    secondary = Red300,
-    onSecondary = Color.Black,
+
+// val DarkColors = darkColors(
+//    primary = Red300,
+//    primaryVariant = Red700,
+//    onPrimary = Color.Black,
+//    secondary = Red300,
+//    onSecondary = Color.Black,
+//    error = Red200
+//)
+val DarkColors = darkColors(
+    primary = DarkPurple,
+    primaryVariant = DarkPurpleDarker,
+    onPrimary = Magnolia,
+    secondary = RussianViolet,
+    secondaryVariant = RussianVioletDarker,
+    onSecondary = Magnolia,
+    surface = XiketicDarker,
+    onSurface = Magnolia,
     error = Red200
 )
 

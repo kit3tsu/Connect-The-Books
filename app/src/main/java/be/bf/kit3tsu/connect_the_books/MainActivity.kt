@@ -85,11 +85,12 @@ fun ComplexExampleContent() {
 @Composable
 fun DefaultPreview() {
     AppTheme() {
-        Column() {
-            Greeting("Android")
-            MinimalExampleContent()
-            ComplexExampleContent()
+        Surface() {
+            Column() {
+                Greeting("Android")
+                MinimalExampleContent()
+                ComplexExampleContent()
+            }
         }
-
     }
 }
