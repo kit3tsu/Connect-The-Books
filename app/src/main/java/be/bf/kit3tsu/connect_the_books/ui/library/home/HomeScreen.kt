@@ -15,7 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,13 +30,16 @@ import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
 import be.bf.kit3tsu.connect_the_books.ui.theme.MyBottomAppBar
 import coil.compose.rememberAsyncImagePainter
 import com.example.tfe.data.entity.Book
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination (start = true) //FIXME
 @Composable
 fun HomeScreen(
     directory: Array<Directory>,
     onNewFolder: () -> Unit,
     onNewNote: () -> Unit,
-    onSearchBook: () -> Unit
+    onSearchBook: () -> Unit,
 ) {
     Surface(
         Modifier.fillMaxSize(),
@@ -215,7 +217,11 @@ fun HomeButton(
 
 @Composable
 fun NewFolderButton(onNewFolder: () -> Unit) {
-    AppButton(onClickAction = onNewFolder, text = "Add New Folded")
+    AppButton(onClickAction = {
+//        navigator.navigate(
+//
+//    )
+                              }, text = "Add New Folded")
 }
 
 @Composable
@@ -242,7 +248,7 @@ fun NewNoteButton(onNewNote: () -> Unit) {
 @Composable
 fun PreviewHomeScreen() {
     ConnectTheBooksTheme {
-        HomeScreen(directory = folders, onNewFolder = { }, onNewNote = { }, {})
+        //HomeScreen(directory = folders, onNewFolder = { }, onNewNote = { }, {})
     }
 }
 
@@ -255,7 +261,7 @@ fun PreviewHomeScreen() {
 @Composable
 fun PreviewDarkHomeScreen() {
     ConnectTheBooksTheme {
-        HomeScreen(directory = folders, onNewFolder = { }, onNewNote = { }, {})
+        //HomeScreen(directory = folders, onNewFolder = { }, onNewNote = { }, {}, )
     }
 }
 

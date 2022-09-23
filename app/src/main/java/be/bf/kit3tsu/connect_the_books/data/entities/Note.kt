@@ -1,10 +1,13 @@
 package be.bf.kit3tsu.connect_the_books.data.entities
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import be.bf.kit3tsu.connect_the_books.data.util.Visibility
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "Note")
 data class Note constructor(
     @PrimaryKey(autoGenerate = true)
@@ -20,4 +23,4 @@ data class Note constructor(
     var visibility: Visibility,
     @ColumnInfo(name = "note_directory")
     var parentDirectory: Int
-)
+): Parcelable

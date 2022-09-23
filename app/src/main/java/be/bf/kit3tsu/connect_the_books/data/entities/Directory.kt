@@ -1,12 +1,14 @@
 package be.bf.kit3tsu.connect_the_books.data.entities
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import be.bf.kit3tsu.connect_the_books.data.util.Visibility
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 @Entity(tableName = "Directory")
 data class Directory constructor(
     @PrimaryKey(autoGenerate = true)
@@ -21,4 +23,4 @@ data class Directory constructor(
     var visibility: Visibility,
     @ColumnInfo(name = "directory_parent")
     var parentDirectory: Int?
-)
+) : Parcelable

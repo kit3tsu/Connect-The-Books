@@ -29,11 +29,16 @@ import be.bf.kit3tsu.connect_the_books.ui.library.notes
 import be.bf.kit3tsu.connect_the_books.ui.library.oneNote
 import be.bf.kit3tsu.connect_the_books.ui.theme.AppTheme
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+
+@Destination
 @Composable
 fun FolderScreen(
     noteList: Array<Note>,
-    subFolder: Array<Directory>
+    subFolder: Array<Directory>,
+    navigator: DestinationsNavigator
 ) {
     Surface() {
         Column(
@@ -92,7 +97,7 @@ fun NotePreviewPreview() {
 fun FolderScreenPreview() {
     ConnectTheBooksTheme {
         Column() {
-            FolderScreen(notes, folders)
+           // FolderScreen(notes, folders)
         }
     }
 }

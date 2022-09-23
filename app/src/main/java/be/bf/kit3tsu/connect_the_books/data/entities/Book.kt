@@ -1,8 +1,11 @@
 package com.example.tfe.data.entity
 
+import android.os.Parcelable
 import androidx.room.*
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(
     tableName = "Book",
     foreignKeys = [ForeignKey(
@@ -23,4 +26,4 @@ data class Book constructor(
     var isbn: String,
     @ColumnInfo(name = "book_directory")
     var directory: Int
-){}
+) : Parcelable
