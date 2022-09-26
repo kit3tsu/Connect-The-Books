@@ -1,29 +1,22 @@
 package be.bf.kit3tsu.connect_the_books.ui.theme
 
 import android.content.res.Configuration
-import android.graphics.drawable.Icon
-import android.service.autofill.OnClickAction
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 
 @Composable
-fun AppButton(onClickAction: () -> Unit, text: String) {
+fun AppButton(onClickAction: () -> Unit, text: String, navigator: DestinationsNavigator) {
     Button(
         onClick = { onClickAction },
         modifier = Modifier,
@@ -97,7 +90,7 @@ fun IconButtonApp(imageVector: ImageVector, contentDescription: String, onClickA
 @Composable
 fun PreviewAppButton() {
     ConnectTheBooksTheme {
-        AppButton(onClickAction = { }, text = "Click Me")
+        AppButton(onClickAction = { }, text = "Click Me", navigator = EmptyDestinationsNavigator)
     }
 }
 
@@ -110,7 +103,7 @@ fun PreviewAppButton() {
 @Composable
 fun PreviewAppButtonDark() {
     ConnectTheBooksTheme {
-        AppButton(onClickAction = { }, text = "Click Me")
+        AppButton(onClickAction = { }, text = "Click Me", navigator = EmptyDestinationsNavigator)
     }
 }
 

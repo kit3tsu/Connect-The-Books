@@ -20,41 +20,40 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
-import be.bf.kit3tsu.connect_the_books.ui.library.books
-import be.bf.kit3tsu.connect_the_books.ui.library.folders
-import be.bf.kit3tsu.connect_the_books.ui.library.oneBook
-import be.bf.kit3tsu.connect_the_books.ui.library.oneDirectory
-import be.bf.kit3tsu.connect_the_books.ui.theme.AppButton
-import be.bf.kit3tsu.connect_the_books.ui.theme.AppSearchBar
-import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
-import be.bf.kit3tsu.connect_the_books.ui.theme.MyBottomAppBar
+import be.bf.kit3tsu.connect_the_books.ui.destinations.EmptyFolderScreenDestination
+import be.bf.kit3tsu.connect_the_books.ui.destinations.EmptyNoteScreenDestination
+import be.bf.kit3tsu.connect_the_books.ui.destinations.FolderScreenDestination
+import be.bf.kit3tsu.connect_the_books.ui.library.*
+import be.bf.kit3tsu.connect_the_books.ui.theme.*
 import coil.compose.rememberAsyncImagePainter
 import com.example.tfe.data.entity.Book
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 
-@Destination (start = true) //FIXME
+@Destination(start = true)
 @Composable
 fun HomeScreen(
-    directory: Array<Directory>,
-    onNewFolder: () -> Unit,
-    onNewNote: () -> Unit,
-    onSearchBook: () -> Unit,
+    navigator: DestinationsNavigator
 ) {
+    val onNewFolder = action()
+    val onNewNote = action()
+    val onSearchBook = action()
+    val directory = folders
     Surface(
-        Modifier.fillMaxSize(),
-        // TODO Define here Personal and Material view design
+        Modifier.fillMaxSize()
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BookSearch(onSearchBook)
-            FolderCarousel(directory)
-            BookCarousel(books)
+            BookSearch({ onSearchBook })
+            FolderCarousel(directory, navigator)
+            BookCarousel(books, navigator)
             HomeButton(
-                onNewFolder,
-                onNewNote
+                { onNewFolder },
+                { onNewNote },
+                navigator
             )
             MyBottomAppBar()
         }
@@ -63,7 +62,8 @@ fun HomeScreen(
 
 @Composable
 fun FolderCarousel(
-    subFolder: Array<Directory>
+    subFolder: Array<Directory>,
+    navigator: DestinationsNavigator
 ) {
     LazyHorizontalGrid(
         rows = GridCells.Fixed(1),
@@ -71,14 +71,15 @@ fun FolderCarousel(
         modifier = Modifier.height(150.dp)
     ) {
         items(items = subFolder) { item ->
-            FolderItem(item = item)
+            FolderItem(item = item, navigator)
         }
     }
 }
 
 @Composable
 fun BookCarousel(
-    books: Array<Book>
+    books: Array<Book>,
+    navigator: DestinationsNavigator
 ) {
     LazyHorizontalGrid(
         rows = GridCells.Fixed(1),
@@ -86,7 +87,7 @@ fun BookCarousel(
         modifier = Modifier.height(150.dp)
     ) {
         items(items = books) { item ->
-            BookItem(item = item)
+            BookItem(navigator, item = item)
         }
     }
 }
@@ -95,13 +96,14 @@ fun BookCarousel(
 @Composable
 fun FolderItem(
     item: Directory,
+    navigator: DestinationsNavigator,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
             .padding(all = 6.dp)
             .aspectRatio(1.25f, matchHeightConstraintsFirst = true)
-            .clickable { },// TODO Add navigation
+            .clickable { navigator.navigate(FolderScreenDestination(item.directoryId)) },// TODO Add navigation
         shape = MaterialTheme.shapes.medium,
         backgroundColor = MaterialTheme.colors.primary,
         elevation = 2.dp,
@@ -129,15 +131,18 @@ fun FolderItem(
 
 @Composable
 fun BookItem(
+    navigator: DestinationsNavigator,
     item: Book,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier
             .padding(all = 5.dp)
             .aspectRatio(0.8f, matchHeightConstraintsFirst = true)
             .height(150.dp)
-            .clickable { },// TODO Add navigation,
+            .clickable {
+                navigator.navigate(FolderScreenDestination(item.directory))
+            },// TODO Add navigation,
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.primaryVariant,
         elevation = 2.dp
@@ -196,7 +201,8 @@ fun BookSearch(onSearchBook: () -> Unit) {
 @Composable
 fun HomeButton(
     onNewFolder: () -> Unit,
-    onNewNote: () -> Unit
+    onNewNote: () -> Unit,
+    navigator: DestinationsNavigator
 ) {
     Column(
         verticalArrangement = Arrangement.SpaceAround,
@@ -209,24 +215,36 @@ fun HomeButton(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            NewNoteButton(onNewNote)
-            NewFolderButton(onNewFolder)
+            NewNoteButton(onNewNote, navigator)
+            NewFolderButton(onNewFolder, navigator)
         }
     }
 }
 
 @Composable
-fun NewFolderButton(onNewFolder: () -> Unit) {
-    AppButton(onClickAction = {
-//        navigator.navigate(
-//
-//    )
-                              }, text = "Add New Folded")
+fun NewFolderButton(onNewFolder: () -> Unit, navigator: DestinationsNavigator) {
+    Button(
+        onClick = { navigator.navigate(EmptyFolderScreenDestination) },
+        modifier = Modifier,
+        shape = MaterialTheme.shapes.small,
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
+        contentPadding = PaddingValues(8.dp),
+    ) {
+        ButtonText("Add New Folded")
+    }
 }
 
 @Composable
-fun NewNoteButton(onNewNote: () -> Unit) {
-    AppButton(onClickAction = onNewNote, text = "Add New Note")
+fun NewNoteButton(onNewNote: () -> Unit, navigator: DestinationsNavigator) {
+    Button(
+        onClick = { navigator.navigate(EmptyNoteScreenDestination) },
+        modifier = Modifier,
+        shape = MaterialTheme.shapes.small,
+        colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
+        contentPadding = PaddingValues(8.dp),
+    ) {
+        ButtonText("Add New Note")
+    }
 }
 
 
@@ -269,7 +287,7 @@ fun PreviewDarkHomeScreen() {
 @Composable
 fun PreviewFolderItem() {
     ConnectTheBooksTheme {
-        FolderItem(item = oneDirectory)
+        FolderItem(item = oneDirectory, navigator = EmptyDestinationsNavigator)
     }
 }
 
@@ -282,7 +300,7 @@ fun PreviewFolderItem() {
 @Composable
 fun PreviewDarkFolderItem() {
     ConnectTheBooksTheme {
-        FolderItem(item = oneDirectory)
+        FolderItem(item = oneDirectory, navigator = EmptyDestinationsNavigator)
     }
 }
 
@@ -290,7 +308,7 @@ fun PreviewDarkFolderItem() {
 @Composable
 fun PreviewBookItem() {
     ConnectTheBooksTheme {
-        BookItem(item = oneBook)
+        BookItem(item = oneBook, navigator = EmptyDestinationsNavigator)
     }
 }
 
@@ -303,6 +321,6 @@ fun PreviewBookItem() {
 @Composable
 fun PreviewDarkBookItem() {
     ConnectTheBooksTheme {
-        BookItem(item = oneBook)
+        BookItem(item = oneBook, navigator = EmptyDestinationsNavigator)
     }
 }

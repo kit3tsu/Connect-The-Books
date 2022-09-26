@@ -42,7 +42,8 @@ val notes = arrayOf(
     Note(7,"Akainu","FDD Manma","/c/docu/app", Visibility.PUBLIC,7),
     Note(7,"Kizaru","FDD Luniere","/c/docu/app", Visibility.PUBLIC,7),
 )
-
+fun getNotesList(folderId : Int) = notes
+fun getSubFoldersList(folderId : Int) = folders
 val tags = arrayOf(
     Tag(1,"Manga"),
     Tag(2,"Fiction"),
@@ -75,3 +76,7 @@ val markdown = """
 	![Image](https://example.com/img.png)  
 	<a href="https://www.google.com/">Google</a>  
 """.trim()
+
+fun action() : Unit {
+
+}

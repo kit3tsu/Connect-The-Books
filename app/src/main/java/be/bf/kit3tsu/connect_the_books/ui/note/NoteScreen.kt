@@ -4,41 +4,57 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import be.bf.kit3tsu.connect_the_books.ui.library.markdown
-import dev.jeziellago.compose.markdowntext.MarkdownText
+import be.bf.kit3tsu.connect_the_books.data.entities.Note
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination
 @Composable
-fun NoteScreen(){
-    val mode = remember {
-    mutableStateOf(true)
+fun NoteScreen(note : Note,navigator: DestinationsNavigator){
+    Column() {
+        Row() {
+            Text(text = note.name)
+            NoteOption()
+        }
+//        if(mode.value){
+//            MarkdownText(markdown = markdown)
+//        }else{
+//            EditMode()
+//        } TODO manage mode
+        NoteHelper()
+    }
 }
+@Destination
+@Composable
+fun EmptyNoteScreen(){
+//    val mode = remember {
+//    mutableStateOf(true)
+//}
     Column() {
         Row() {
             Text(text = "Titre")
             NoteOption()
         }
-        if(mode.value){
-            MarkdownText(markdown = markdown)
-        }else{
-            EditMode()
-        }
+//        if(mode.value){
+//            MarkdownText(markdown = markdown)
+//        }else{
+//            EditMode()
+//        } TODO Edit mode by default
         NoteHelper()
     }
 }
 
 @Composable
 fun NoteHelper() {
-    TODO("Not yet implemented")
+
 }
 
 @Composable
 fun NoteOption() {
-    TODO("Not yet implemented")
+
 }
 
 @Composable
 fun EditMode() {
-    TODO("Not yet implemented")
+
 }
