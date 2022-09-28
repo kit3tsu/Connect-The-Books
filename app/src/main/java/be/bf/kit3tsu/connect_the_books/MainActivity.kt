@@ -17,8 +17,10 @@ import be.bf.kit3tsu.connect_the_books.ui.NavGraphs
 import be.bf.kit3tsu.connect_the_books.ui.theme.AppTheme
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
+import dagger.hilt.android.AndroidEntryPoint
 import dev.jeziellago.compose.markdowntext.MarkdownText
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
