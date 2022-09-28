@@ -5,7 +5,7 @@ import be.bf.kit3tsu.connect_the_books.data.entities.Note
 import be.bf.kit3tsu.connect_the_books.data.entities.NoteTagCrossRef
 import be.bf.kit3tsu.connect_the_books.data.entities.Tag
 import be.bf.kit3tsu.connect_the_books.data.util.Visibility
-import com.example.tfe.data.entity.Book
+import be.bf.kit3tsu.connect_the_books.data.entities.Book
 
 val folders = arrayOf(
     Directory(0,"Home","root","....", Visibility.PUBLIC,null),

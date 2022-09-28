@@ -1,4 +1,4 @@
-package com.example.tfe.data.entity
+package be.bf.kit3tsu.connect_the_books.data.entities
 
 import android.os.Parcelable
 import androidx.room.*

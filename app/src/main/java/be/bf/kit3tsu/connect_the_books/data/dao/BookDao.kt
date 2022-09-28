@@ -1,10 +1,8 @@
 package be.bf.kit3tsu.connect_the_books.data.dao
 
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.tfe.data.entity.Book
+import be.bf.kit3tsu.connect_the_books.data.entities.Book
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -26,7 +26,7 @@ import be.bf.kit3tsu.connect_the_books.ui.destinations.FolderScreenDestination
 import be.bf.kit3tsu.connect_the_books.ui.library.*
 import be.bf.kit3tsu.connect_the_books.ui.theme.*
 import coil.compose.rememberAsyncImagePainter
-import com.example.tfe.data.entity.Book
+import be.bf.kit3tsu.connect_the_books.data.entities.Book
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator

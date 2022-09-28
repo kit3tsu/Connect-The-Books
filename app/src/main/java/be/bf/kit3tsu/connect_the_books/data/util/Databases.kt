@@ -17,11 +17,11 @@ import be.bf.kit3tsu.connect_the_books.data.entities.Tag
 import be.bf.kit3tsu.connect_the_books.data.util.converters.DateConverter
 import be.bf.kit3tsu.connect_the_books.data.util.converters.EntityConverters
 import be.bf.kit3tsu.connect_the_books.data.util.converters.EnumConverter
-import com.example.tfe.data.entity.Book
+import be.bf.kit3tsu.connect_the_books.data.entities.Book
 
 @Database(
     entities = [Book::class, Note::class,Tag::class,Directory::class,NoteTagCrossRef::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(EnumConverter::class,DateConverter::class,EntityConverters::class)

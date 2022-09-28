@@ -4,6 +4,7 @@ plugins {
     id "kotlin-kapt"
     id 'kotlin-parcelize'
     id 'com.google.devtools.ksp' version '1.7.0-1.0.6'
+    id 'dagger.hilt.android.plugin'
 }
 kotlin {
     sourceSets {
@@ -96,5 +97,9 @@ dependencies {
     implementation 'com.github.jeziellago:compose-markdown:0.3.0'
 //add image src from internet
     implementation("io.coil-kt:coil-compose:2.0.0")
+
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-compiler:2.38.1"
+
 
 }
