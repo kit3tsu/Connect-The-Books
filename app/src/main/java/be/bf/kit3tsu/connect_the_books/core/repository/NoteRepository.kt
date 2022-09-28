@@ -1,4 +1,4 @@
-package be.bf.kit3tsu.connect_the_books.data.Repository
+package be.bf.kit3tsu.connect_the_books.core.repository
 
 import be.bf.kit3tsu.connect_the_books.data.entities.Note
 import kotlinx.coroutines.flow.Flow

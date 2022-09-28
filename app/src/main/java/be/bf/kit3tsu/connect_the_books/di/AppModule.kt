@@ -2,7 +2,7 @@ package be.bf.kit3tsu.connect_the_books.di
 
 import android.app.Application
 import androidx.room.Room
-import be.bf.kit3tsu.connect_the_books.data.Repository.NoteRepository
+import be.bf.kit3tsu.connect_the_books.core.repository.NoteRepository
 import be.bf.kit3tsu.connect_the_books.data.Repository.NoteRepositoryImpl
 import be.bf.kit3tsu.connect_the_books.data.util.Databases
 import dagger.Module
@@ -25,7 +25,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNoteRepository(db:Databases):NoteRepository{
+    fun provideNoteRepository(db:Databases): NoteRepository {
         return NoteRepositoryImpl(db.noteDao())
     }
 }
