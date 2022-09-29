@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import be.bf.kit3tsu.connect_the_books.data.entities.Note
 import be.bf.kit3tsu.connect_the_books.ui.destinations.NoteScreenDestination
 import be.bf.kit3tsu.connect_the_books.ui.library.*
-import be.bf.kit3tsu.connect_the_books.ui.library.home.FolderCarousel
+import be.bf.kit3tsu.connect_the_books.ui.library.home.DirectoryCarousel
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -28,18 +28,18 @@ import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 
 @Destination
 @Composable
-fun FolderScreen(
-    folderId: Int,
+fun DirectoryScreen(
+    directoryId: Int,
     navigator: DestinationsNavigator
 ) {
-    val noteList = getNotesList(folderId)
-    val subFolder = getSubFoldersList(folderId)
+    val noteList = getNotesList(directoryId)
+    val subDirectory = getSubFoldersList(directoryId)
     Surface() {
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            FolderCarousel(subFolder, navigator)
+            DirectoryCarousel(subDirectory, navigator)
             LazyColumn(
                 contentPadding = PaddingValues(start = 8.dp, end = 8.dp),
                 modifier = Modifier.height(360.dp)
@@ -57,7 +57,7 @@ fun FolderScreen(
 
 @Destination
 @Composable
-fun EmptyFolderScreen(
+fun EmptyDirectoryScreen(
     navigator: DestinationsNavigator
 ) {
     Surface() {
@@ -66,7 +66,7 @@ fun EmptyFolderScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
-            Text(text = "Empty Folder")
+            Text(text = "Empty Directory")
         }
     }
 }
@@ -88,8 +88,8 @@ fun NotePreview(note: Note, navigator: DestinationsNavigator) {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth(1f)
         ) {
-            Text(text = note.name, style = MaterialTheme.typography.subtitle1)
-            Text(text = note.description, style = MaterialTheme.typography.body2)
+            Text(text = note.title, style = MaterialTheme.typography.subtitle1)
+            //Text(text = note.description, style = MaterialTheme.typography.body2)
         }
     }
 }
@@ -106,10 +106,10 @@ fun NotePreviewPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun FolderScreenPreview() {
+fun DirectoryScreenPreview() {
     ConnectTheBooksTheme {
         Column() {
-            FolderScreen(1, navigator = EmptyDestinationsNavigator)
+            DirectoryScreen(1, navigator = EmptyDestinationsNavigator)
         }
     }
 }

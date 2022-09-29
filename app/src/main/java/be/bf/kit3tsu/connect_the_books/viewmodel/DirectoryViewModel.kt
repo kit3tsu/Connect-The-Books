@@ -11,8 +11,6 @@ import be.bf.kit3tsu.connect_the_books.core.usecases.directory_uc.DirectoryUseCa
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
 import be.bf.kit3tsu.connect_the_books.data.util.Visibility
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -36,7 +34,7 @@ class DirectoryViewModel @Inject constructor(
                         useCases.getDirectory(directoryId).collect() { directory ->
                             currentDirectoryId = directory.directoryId
                             currentDirectoryParent = directory.parentDirectory
-                            currentDirectoryTitle = directory.name
+                            currentDirectoryTitle = directory.title
                             currentDirectoryVisibility = directory.visibility
                         }
                     }
@@ -60,9 +58,7 @@ class DirectoryViewModel @Inject constructor(
                     useCases.addDirectory(
                         Directory(
                             directoryId = currentDirectoryId,
-                            name = currentDirectoryTitle,
-                            path = "",
-                            imgSrc = "",
+                            title = currentDirectoryTitle,
                             visibility = currentDirectoryVisibility,
                             parentDirectory = currentDirectoryParent
                         )

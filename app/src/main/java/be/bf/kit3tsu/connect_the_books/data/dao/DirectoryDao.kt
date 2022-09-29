@@ -16,6 +16,9 @@ interface DirectoryDao : BaseDao<Directory> {
     @Query("SELECT * FROM Directory where directory_id = :id")
     fun findById(id: Int): Flow<Directory>
 
+//    @Query("SELECT * FROM Directory where directory_parent = 0")
+//    fun getRootDirectory():  Flow<List<Directory>>
+
     @Transaction
     @Query("SELECT * FROM Directory")
     fun findSubDirectory(): Flow<List<DirectorySubDirectory>>

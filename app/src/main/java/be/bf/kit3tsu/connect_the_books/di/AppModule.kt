@@ -82,7 +82,7 @@ object AppModule {
             getBook = GetBook(bookRepository),
             getBooks = GetBooks(bookRepository),
             getDirectory = GetDirectory(directoryRepository),
-            getDirectories = GetSubDirectories(directoryRepository)
+            getSubDirectories = GetSubDirectories(directoryRepository)
         )
     }
 
@@ -92,7 +92,7 @@ object AppModule {
         return DirectoryUseCases(
             addDirectory = AddDirectory(repository),
             deleteDirectory = DeleteDirectory(repository),
-            getDirectories = GetSubDirectories(repository),
+            getSubDirectories = GetSubDirectories(repository),
             getDirectory = GetDirectory(repository),
             getNotes = GetNotes(repository)
         )

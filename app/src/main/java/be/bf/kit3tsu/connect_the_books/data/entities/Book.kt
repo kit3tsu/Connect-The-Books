@@ -18,7 +18,7 @@ data class Book constructor(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "book_id")
     var bookId: Int = -1,
-    @ColumnInfo(name = "book_name")
+    @ColumnInfo(name = "book_title")
     var title: String,
     @ColumnInfo(name = "book_authors")
     var authors: String,

@@ -20,9 +20,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
-import be.bf.kit3tsu.connect_the_books.ui.destinations.EmptyFolderScreenDestination
+import be.bf.kit3tsu.connect_the_books.ui.destinations.EmptyDirectoryScreenDestination
 import be.bf.kit3tsu.connect_the_books.ui.destinations.EmptyNoteScreenDestination
-import be.bf.kit3tsu.connect_the_books.ui.destinations.FolderScreenDestination
+import be.bf.kit3tsu.connect_the_books.ui.destinations.DirectoryScreenDestination
 import be.bf.kit3tsu.connect_the_books.ui.library.*
 import be.bf.kit3tsu.connect_the_books.ui.theme.*
 import coil.compose.rememberAsyncImagePainter
@@ -36,7 +36,7 @@ import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 fun HomeScreen(
     navigator: DestinationsNavigator
 ) {
-    val onNewFolder = action()
+    val onNewDirectory = action()
     val onNewNote = action()
     val onSearchBook = action()
     val directory = folders
@@ -48,10 +48,10 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             BookSearch({ onSearchBook })
-            FolderCarousel(directory, navigator)
+            DirectoryCarousel(directory, navigator)
             BookCarousel(books, navigator)
             HomeButton(
-                { onNewFolder },
+                { onNewDirectory },
                 { onNewNote },
                 navigator
             )
@@ -61,8 +61,8 @@ fun HomeScreen(
 }
 
 @Composable
-fun FolderCarousel(
-    subFolder: Array<Directory>,
+fun DirectoryCarousel(
+    subDirectory: Array<Directory>,
     navigator: DestinationsNavigator
 ) {
     LazyHorizontalGrid(
@@ -70,8 +70,8 @@ fun FolderCarousel(
         contentPadding = PaddingValues(all = 2.5.dp),
         modifier = Modifier.height(150.dp)
     ) {
-        items(items = subFolder) { item ->
-            FolderItem(item = item, navigator)
+        items(items = subDirectory) { item ->
+            DirectoryItem(item = item, navigator)
         }
     }
 }
@@ -94,7 +94,7 @@ fun BookCarousel(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun FolderItem(
+fun DirectoryItem(
     item: Directory,
     navigator: DestinationsNavigator,
     modifier: Modifier = Modifier
@@ -103,7 +103,7 @@ fun FolderItem(
         modifier = modifier
             .padding(all = 6.dp)
             .aspectRatio(1.25f, matchHeightConstraintsFirst = true)
-            .clickable { navigator.navigate(FolderScreenDestination(item.directoryId)) },// TODO Add navigation
+            .clickable { navigator.navigate(DirectoryScreenDestination(item.directoryId)) },// TODO Add navigation
         shape = MaterialTheme.shapes.medium,
         backgroundColor = MaterialTheme.colors.primary,
         elevation = 2.dp,
@@ -113,7 +113,7 @@ fun FolderItem(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = item.name, style = MaterialTheme.typography.h6)
+            Text(text = item.title, style = MaterialTheme.typography.h6)
             Divider(thickness = 2.dp, color = MaterialTheme.colors.onPrimary)
 
             Column(
@@ -123,7 +123,6 @@ fun FolderItem(
                 Text(text = "Nb Note = 12")
                 Text(text = "Nb Note = 10")
                 Text(text = "Nb Note = 3")
-                Text(text = item.path)
             }
         }
     }
@@ -141,7 +140,7 @@ fun BookItem(
             .aspectRatio(0.8f, matchHeightConstraintsFirst = true)
             .height(150.dp)
             .clickable {
-                navigator.navigate(FolderScreenDestination(item.directory))
+                navigator.navigate(DirectoryScreenDestination(item.directory))
             },// TODO Add navigation,
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.primaryVariant,
@@ -200,7 +199,7 @@ fun BookSearch(onSearchBook: () -> Unit) {
 
 @Composable
 fun HomeButton(
-    onNewFolder: () -> Unit,
+    onNewDirectory: () -> Unit,
     onNewNote: () -> Unit,
     navigator: DestinationsNavigator
 ) {
@@ -216,15 +215,15 @@ fun HomeButton(
             verticalAlignment = Alignment.CenterVertically
         ) {
             NewNoteButton(onNewNote, navigator)
-            NewFolderButton(onNewFolder, navigator)
+            NewDirectoryButton(onNewDirectory, navigator)
         }
     }
 }
 
 @Composable
-fun NewFolderButton(onNewFolder: () -> Unit, navigator: DestinationsNavigator) {
+fun NewDirectoryButton(onNewDirectory: () -> Unit, navigator: DestinationsNavigator) {
     Button(
-        onClick = { navigator.navigate(EmptyFolderScreenDestination) },
+        onClick = { navigator.navigate(EmptyDirectoryScreenDestination) },
         modifier = Modifier,
         shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
@@ -266,7 +265,7 @@ fun NewNoteButton(onNewNote: () -> Unit, navigator: DestinationsNavigator) {
 @Composable
 fun PreviewHomeScreen() {
     ConnectTheBooksTheme {
-        //HomeScreen(directory = folders, onNewFolder = { }, onNewNote = { }, {})
+        //HomeScreen(directory = Directorys, onNewDirectory = { }, onNewNote = { }, {})
     }
 }
 
@@ -279,15 +278,15 @@ fun PreviewHomeScreen() {
 @Composable
 fun PreviewDarkHomeScreen() {
     ConnectTheBooksTheme {
-        //HomeScreen(directory = folders, onNewFolder = { }, onNewNote = { }, {}, )
+        //HomeScreen(directory = Directorys, onNewDirectory = { }, onNewNote = { }, {}, )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewFolderItem() {
+fun PreviewDirectoryItem() {
     ConnectTheBooksTheme {
-        FolderItem(item = oneDirectory, navigator = EmptyDestinationsNavigator)
+        DirectoryItem(item = oneDirectory, navigator = EmptyDestinationsNavigator)
     }
 }
 
@@ -298,9 +297,9 @@ fun PreviewFolderItem() {
     name = "DefaultPreviewDark"
 )
 @Composable
-fun PreviewDarkFolderItem() {
+fun PreviewDarkDirectoryItem() {
     ConnectTheBooksTheme {
-        FolderItem(item = oneDirectory, navigator = EmptyDestinationsNavigator)
+        DirectoryItem(item = oneDirectory, navigator = EmptyDestinationsNavigator)
     }
 }
 

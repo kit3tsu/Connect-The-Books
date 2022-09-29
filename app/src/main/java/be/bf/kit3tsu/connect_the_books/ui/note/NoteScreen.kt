@@ -13,7 +13,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun NoteScreen(note: Note, navigator: DestinationsNavigator) {
     Column() {
         Row() {
-            Text(text = note.name)
+            Text(text = note.title)
             NoteOption()
         }
 //        if(mode.value){

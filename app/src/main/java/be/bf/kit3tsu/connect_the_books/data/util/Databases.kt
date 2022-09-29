@@ -21,7 +21,7 @@ import be.bf.kit3tsu.connect_the_books.data.entities.Book
 
 @Database(
     entities = [Book::class, Note::class, Tag::class, Directory::class, NoteTagCrossRef::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(EnumConverter::class, DateConverter::class, EntityConverters::class)

@@ -8,9 +8,13 @@ import be.bf.kit3tsu.connect_the_books.data.relations.DirectorySubDirectory
 import kotlinx.coroutines.flow.Flow
 
 class DirectoryRepositoryImpl(private val dao: DirectoryDao) : DirectoryRepository {
-    override suspend fun getDirectorys(): Flow<List<Directory>> {
+    override suspend fun getDirectories(): Flow<List<Directory>> {
         return dao.findAll()
     }
+
+//    override suspend fun getRootDirectory(): Flow<List<Directory>> {
+//        return dao.getRootDirectory()
+//    }
 
     override suspend fun getDirectoryById(id: Int): Flow<Directory> {
         return dao.findById(id)

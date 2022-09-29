@@ -5,10 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import be.bf.kit3tsu.connect_the_books.core.features.directory.DirectoryEvent
 import be.bf.kit3tsu.connect_the_books.core.features.note.NoteEvent
 import be.bf.kit3tsu.connect_the_books.core.features.note.NoteState
-import be.bf.kit3tsu.connect_the_books.core.repository.NoteRepository
 import be.bf.kit3tsu.connect_the_books.core.usecases.note_uc.NoteUseCases
 import be.bf.kit3tsu.connect_the_books.data.entities.Note
 import be.bf.kit3tsu.connect_the_books.data.util.Visibility
@@ -36,7 +34,7 @@ class NoteViewModel @Inject constructor(
                         currentNoteId = note.noteId
                         currentNoteDirectory = note.parentDirectory
                         currentNoteVisibility = note.visibility
-                        _noteTitle.value = noteTitle.value.copy(text = note.name)
+                        _noteTitle.value = noteTitle.value.copy(text = note.title)
                         _noteContent.value = noteContent.value.copy(isHintVisible = false)
                     }
                 }
@@ -80,10 +78,9 @@ class NoteViewModel @Inject constructor(
                     useCases.addNote(
                         Note(
                             noteId = currentNoteId,
-                            name = _noteTitle.value.text,
-                            description = _noteContent.value.text,
+                            title = _noteTitle.value.text,
+                            content = _noteContent.value.text,
                             visibility = currentNoteVisibility,
-                            path = "",
                             parentDirectory = currentNoteDirectory
                         //TODO change default value
                         )
@@ -96,10 +93,9 @@ class NoteViewModel @Inject constructor(
                     useCases.deleteNote(
                         Note(
                             noteId = currentNoteId,
-                            name = _noteTitle.value.text,
-                            description = _noteContent.value.text,
+                            title = _noteTitle.value.text,
+                            content = _noteContent.value.text,
                             visibility = currentNoteVisibility,
-                            path = "",
                             parentDirectory = currentNoteDirectory
                             //TODO change default value
                         )

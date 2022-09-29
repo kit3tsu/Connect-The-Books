@@ -8,15 +8,15 @@ import be.bf.kit3tsu.connect_the_books.data.util.Visibility
 import be.bf.kit3tsu.connect_the_books.data.entities.Book
 
 val folders = arrayOf(
-    Directory(0, "Home", "root", "....", Visibility.PUBLIC, null),
-    Directory(1, "Organisation", "root/home", "....", Visibility.PUBLIC, 0),
-    Directory(2, "Pirates", "root", "....", Visibility.PUBLIC, 1),
-    Directory(3, "Marines", "root", "....", Visibility.PUBLIC, 9),
-    Directory(4, "Corsaires", "root", "....", Visibility.PUBLIC, 1),
-    Directory(5, "Lieu", "root", "....", Visibility.PUBLIC, 0),
-    Directory(6, "Personnage", "root", "....", Visibility.PUBLIC, 2),
-    Directory(7, "Personnage", "root", "....", Visibility.PUBLIC, 3),
-    Directory(8, "Personnage", "root", "....", Visibility.PUBLIC, 4),
+    Directory(0, "Home", Visibility.PUBLIC, null),
+    Directory(1, "Organisation", Visibility.PUBLIC, 0),
+    Directory(2, "Pirates", Visibility.PUBLIC, 1),
+    Directory(3, "Marines", Visibility.PUBLIC, 9),
+    Directory(4, "Corsaires", Visibility.PUBLIC, 1),
+    Directory(5, "Lieu", Visibility.PUBLIC, 0),
+    Directory(6, "Personnage", Visibility.PUBLIC, 2),
+    Directory(7, "Personnage", Visibility.PUBLIC, 3),
+    Directory(8, "Personnage", Visibility.PUBLIC, 4),
 )
 
 val books = arrayOf(
@@ -30,23 +30,16 @@ val books = arrayOf(
 
 
 val notes = arrayOf(
-    Note(1, "Les Pirates", "Ils sont tres tres méchant", "/c/docu/app", Visibility.PUBLIC, 1),
-    Note(2, "Les Marines", "Ils sont encore plus méchant", "/c/docu/app", Visibility.PUBLIC, 1),
-    Note(3, "Les Corsaires", "Ils sont tres tres fort", "/c/docu/app", Visibility.PUBLIC, 1),
-    Note(4, "Les Mugiwara", "Ils sont tres tres gentil", "/c/docu/app", Visibility.PUBLIC, 2),
-    Note(5, "Les Heart Pirates", "Ils sont sympa", "/c/docu/app", Visibility.PUBLIC, 2),
-    Note(
-        6,
-        "Les Roks",
-        "Ils sont tres tres mais vrmt bcp méchant",
-        "/c/docu/app",
-        Visibility.PUBLIC,
-        2
-    ),
-    Note(7, "Les amiraux", "Ils sont tres tres différents", "/c/docu/app", Visibility.PUBLIC, 3),
-    Note(7, "Aokiji", "De la glace", "/c/docu/app", Visibility.PUBLIC, 7),
-    Note(7, "Akainu", "FDD Manma", "/c/docu/app", Visibility.PUBLIC, 7),
-    Note(7, "Kizaru", "FDD Luniere", "/c/docu/app", Visibility.PUBLIC, 7),
+    Note(1, "Les Pirates","", Visibility.PUBLIC, 1),
+    Note(2, "Les Marines","", Visibility.PUBLIC, 1),
+    Note(3, "Les Corsaires","", Visibility.PUBLIC, 1),
+    Note(4, "Les Mugiwara","", Visibility.PUBLIC, 2),
+    Note(5, "Les Heart Pirates","", Visibility.PUBLIC, 2),
+    Note(6, "Les Roks","", Visibility.PUBLIC, 2),
+    Note(7, "Les amiraux","", Visibility.PUBLIC, 3),
+    Note(7, "Aokiji","", Visibility.PUBLIC, 7),
+    Note(7, "Akainu","", Visibility.PUBLIC, 7),
+    Note(7, "Kizaru","", Visibility.PUBLIC, 7),
 )
 
 fun getNotesList(folderId: Int) = notes
@@ -69,9 +62,9 @@ val noteWithTag = arrayOf(
     NoteTagCrossRef(1, 1),
 )
 
-val oneDirectory = Directory(9, "Gouvernement Mondial", "root/GM", "", Visibility.PUBLIC, 1)
+val oneDirectory = Directory(9, "Gouvernement Mondial",  Visibility.PUBLIC, 1)
 val oneBook = Book(7, "One Piece Tome 100", "Oda", "123456789", 0)
-val oneNote = Note(8, "Luffy", "Future Pirates King", "a path", Visibility.PUBLIC, 6)
+val oneNote = Note(8, "Luffy","", Visibility.PUBLIC, 6)
 val oneTag = Tag(8, "Mature")
 
 
