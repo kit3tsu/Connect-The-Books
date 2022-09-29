@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GetDirectories (private val repository: DirectoryRepository) {
     suspend operator fun invoke(): Flow<List<Directory>> {
+        //TODO validate data before insert
         return repository.getDirectorys()
     }
 }
