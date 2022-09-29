@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -112,6 +113,17 @@ fun PreviewAppButtonDark() {
 fun PreviewAppSearchBar() {
     ConnectTheBooksTheme {
         AppSearchBar({}, "Research", {})
+    }
+}
+
+@Composable
+fun DeleteIconButton(
+    onClickAction: () -> Unit,
+    description: String,
+    modifier: Modifier = Modifier
+) {
+    IconButton(onClick = onClickAction) {
+        Icon(imageVector = Icons.Default.Delete, contentDescription = description)
     }
 }
 

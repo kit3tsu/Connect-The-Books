@@ -23,4 +23,4 @@ data class Note constructor(
     var visibility: Visibility,
     @ColumnInfo(name = "note_directory")
     var parentDirectory: Int
-): Parcelable
+) : Parcelable

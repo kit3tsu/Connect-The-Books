@@ -5,8 +5,8 @@ import androidx.room.Entity
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(primaryKeys = ["note_id","tag_id"])
+@Entity(primaryKeys = ["note_id", "tag_id"])
 data class NoteTagCrossRef(
-    val note_id : Int,
-    val tag_id : Int
-): Parcelable
+    val note_id: Int,
+    val tag_id: Int
+) : Parcelable

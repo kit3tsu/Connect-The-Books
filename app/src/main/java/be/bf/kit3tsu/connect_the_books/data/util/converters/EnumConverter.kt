@@ -10,17 +10,18 @@ class EnumConverter {
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
     fun toVisibility(value: String?): Visibility? {
-         if (value == "PUBLIC") {
+        if (value == "PUBLIC") {
             return Visibility.PUBLIC
-        } else if (value == "PRIVATE"){
+        } else if (value == "PRIVATE") {
             return Visibility.PRIVATE
-        }else{
+        } else {
             return null
-         }
+        }
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
-    fun fromVisibility(value : Visibility) : String {
+    fun fromVisibility(value: Visibility): String {
         return value.toString()
     }
 

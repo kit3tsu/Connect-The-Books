@@ -32,7 +32,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabases(app:Application):Databases{
+    fun provideDatabases(app: Application): Databases {
 //        return Room.databaseBuilder(
 //            app,Databases::class.java,"app_db"
 //        ).build
@@ -41,24 +41,25 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNoteRepository(db:Databases): NoteRepository {
+    fun provideNoteRepository(db: Databases): NoteRepository {
         return NoteRepositoryImpl(db.noteDao())
     }
 
     @Provides
     @Singleton
-    fun provideBookRepository(db:Databases): BookRepository {
+    fun provideBookRepository(db: Databases): BookRepository {
         return BookRepositoryImpl(db.bookDao())
     }
-@Provides
+
+    @Provides
     @Singleton
-    fun provideDirectoryRepository(db:Databases): DirectoryRepository {
+    fun provideDirectoryRepository(db: Databases): DirectoryRepository {
         return DirectoryRepositoryImpl(db.directoryDao())
     }
 
     @Provides
     @Singleton
-    fun provideNoteUseCases(repository: NoteRepository):NoteUseCases{
+    fun provideNoteUseCases(repository: NoteRepository): NoteUseCases {
         return NoteUseCases(
             getAllNotes = GetAllNotes(repository),
             addNote = AddNote(repository),
@@ -69,7 +70,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideHomeUseCases(bookRepository: BookRepository,noteRepository: NoteRepository,directoryRepository: DirectoryRepository): HomeUseCases {
+    fun provideHomeUseCases(
+        bookRepository: BookRepository,
+        noteRepository: NoteRepository,
+        directoryRepository: DirectoryRepository
+    ): HomeUseCases {
         return HomeUseCases(
             addNote = AddNote(noteRepository),
             addBook = AddBook(bookRepository),

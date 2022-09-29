@@ -7,7 +7,7 @@ import be.bf.kit3tsu.connect_the_books.data.dao.TagDao
 import be.bf.kit3tsu.connect_the_books.data.entities.Tag
 import kotlinx.coroutines.flow.Flow
 
-class TagRepositoryImpl(private  val dao: TagDao) :TagRepository {
+class TagRepositoryImpl(private val dao: TagDao) : TagRepository {
 
     override suspend fun getTags(): Flow<List<Tag>> {
         return dao.findAll()

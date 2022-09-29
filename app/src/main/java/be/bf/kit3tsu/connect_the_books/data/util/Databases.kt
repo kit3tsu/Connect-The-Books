@@ -20,11 +20,11 @@ import be.bf.kit3tsu.connect_the_books.data.util.converters.EnumConverter
 import be.bf.kit3tsu.connect_the_books.data.entities.Book
 
 @Database(
-    entities = [Book::class, Note::class,Tag::class,Directory::class,NoteTagCrossRef::class],
+    entities = [Book::class, Note::class, Tag::class, Directory::class, NoteTagCrossRef::class],
     version = 2,
     exportSchema = false
 )
-@TypeConverters(EnumConverter::class,DateConverter::class,EntityConverters::class)
+@TypeConverters(EnumConverter::class, DateConverter::class, EntityConverters::class)
 abstract class Databases : RoomDatabase() {
     companion object {
         private var instance: Databases? = null
@@ -39,6 +39,7 @@ abstract class Databases : RoomDatabase() {
             return instance!!
         }
     }
+
     abstract fun bookDao(): BookDao
     abstract fun noteDao(): NoteDao
     abstract fun directoryDao(): DirectoryDao

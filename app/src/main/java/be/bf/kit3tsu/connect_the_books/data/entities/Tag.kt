@@ -15,4 +15,4 @@ data class Tag constructor(
     var tagId: Int = -1,
     @ColumnInfo(name = "tag_Name")
     var name: String
-): Parcelable
+) : Parcelable

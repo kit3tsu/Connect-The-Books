@@ -9,16 +9,17 @@ import java.lang.Integer.parseInt
 class EntityConverters {
     @TypeConverter
     fun toTag(value: String?): Tag? {
-        return if(value == null ) null else {
+        return if (value == null) null else {
             val parts = value.split("-").toTypedArray()
             val id = Integer.parseInt(parts[0])
             val name = parts[1]
             return Tag(id, name)
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
-    fun fromTag(value : Tag) : String {
+    fun fromTag(value: Tag): String {
         return value.tagId.toString() + "-" + value.name
     }
 }

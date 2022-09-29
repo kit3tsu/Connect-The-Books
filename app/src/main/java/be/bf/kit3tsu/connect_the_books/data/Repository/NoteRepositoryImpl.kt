@@ -5,9 +5,9 @@ import be.bf.kit3tsu.connect_the_books.data.dao.NoteDao
 import be.bf.kit3tsu.connect_the_books.data.entities.Note
 import kotlinx.coroutines.flow.Flow
 
-class NoteRepositoryImpl(private val dao : NoteDao) : NoteRepository {
+class NoteRepositoryImpl(private val dao: NoteDao) : NoteRepository {
     override suspend fun getNotes(): Flow<List<Note>> {
-       return dao.findAll()
+        return dao.findAll()
     }
 
     override suspend fun getNoteById(id: Int): Flow<Note> {

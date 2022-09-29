@@ -10,7 +10,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination
 @Composable
-fun NoteScreen(note : Note,navigator: DestinationsNavigator){
+fun NoteScreen(note: Note, navigator: DestinationsNavigator) {
     Column() {
         Row() {
             Text(text = note.name)
@@ -24,9 +24,10 @@ fun NoteScreen(note : Note,navigator: DestinationsNavigator){
         NoteHelper()
     }
 }
+
 @Destination
 @Composable
-fun EmptyNoteScreen(){
+fun EmptyNoteScreen() {
 //    val mode = remember {
 //    mutableStateOf(true)
 //}

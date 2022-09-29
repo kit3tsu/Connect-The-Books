@@ -29,10 +29,10 @@ import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 @Destination
 @Composable
 fun FolderScreen(
-    folderId : Int,
+    folderId: Int,
     navigator: DestinationsNavigator
 ) {
-    val noteList  = getNotesList(folderId)
+    val noteList = getNotesList(folderId)
     val subFolder = getSubFoldersList(folderId)
     Surface() {
         Column(
@@ -41,10 +41,11 @@ fun FolderScreen(
         ) {
             FolderCarousel(subFolder, navigator)
             LazyColumn(
-                contentPadding = PaddingValues(start = 8.dp,end = 8.dp),
-                 modifier = Modifier.height(360.dp)) {
+                contentPadding = PaddingValues(start = 8.dp, end = 8.dp),
+                modifier = Modifier.height(360.dp)
+            ) {
                 items(items = noteList) { note ->
-                    NotePreview(note = note,navigator)
+                    NotePreview(note = note, navigator)
                 }
             }
             BottomAppBar() {
@@ -53,6 +54,7 @@ fun FolderScreen(
         }
     }
 }
+
 @Destination
 @Composable
 fun EmptyFolderScreen(
@@ -64,10 +66,11 @@ fun EmptyFolderScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
-           Text(text = "Empty Folder")
+            Text(text = "Empty Folder")
         }
     }
 }
+
 // contentPadding = PaddingValues(start = 8.dp,end = 8.dp, bottom = 75.dp)
 @Composable
 fun NotePreview(note: Note, navigator: DestinationsNavigator) {
@@ -79,7 +82,7 @@ fun NotePreview(note: Note, navigator: DestinationsNavigator) {
             .clip(CutCornerShape(topStart = 12.dp))
             .background(color = MaterialTheme.colors.primaryVariant)
             .fillMaxWidth(0.9f)
-    ){
+    ) {
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -106,7 +109,7 @@ fun NotePreviewPreview() {
 fun FolderScreenPreview() {
     ConnectTheBooksTheme {
         Column() {
-            FolderScreen(1,navigator = EmptyDestinationsNavigator)
+            FolderScreen(1, navigator = EmptyDestinationsNavigator)
         }
     }
 }

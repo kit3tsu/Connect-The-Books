@@ -18,19 +18,19 @@ import javax.inject.Inject
 @HiltViewModel
 class NoteViewModel @Inject constructor(
     private val useCases: NoteUseCases
-) :ViewModel() {
-   private val _state = mutableStateOf(NoteState())
-    val state : State<NoteState> = _state
+) : ViewModel() {
+    private val _state = mutableStateOf(NoteState())
+    val state: State<NoteState> = _state
     //TODO manage state
 
-    fun onEvent(event: NoteEvent){
-        when(event){
+    fun onEvent(event: NoteEvent) {
+        when (event) {
             is NoteEvent.AddNote -> {
                 viewModelScope.launch {
                     useCases.addNote(event.note)
                 }
             }
-            is NoteEvent.DeleteNote ->{
+            is NoteEvent.DeleteNote -> {
                 viewModelScope.launch {
                     useCases.deleteNote(event.note)
                 }
@@ -46,7 +46,7 @@ class NoteViewModel @Inject constructor(
 //    val eventFlow = _eventFlow.asSharedFlow()
 }
 
-sealed class UiEvent {
-    data class ShowSnackbar(val message : String):UiEvent()
-    object SaveNote : UiEvent()
-}
+//sealed class UiEvent {
+//    data class ShowSnackbar(val message : String):UiEvent()
+//    object SaveNote : UiEvent()
+//}

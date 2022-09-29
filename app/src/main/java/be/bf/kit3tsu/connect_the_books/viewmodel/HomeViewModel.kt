@@ -19,9 +19,9 @@ class HomeViewModel @Inject constructor(
     private val useCases: HomeUseCases
 ) : ViewModel() {
     private val _state = mutableStateOf(HomeState())
-    val state : State<HomeState> = _state
+    val state: State<HomeState> = _state
 
-    private suspend fun getDirectories(){
+    private suspend fun getDirectories() {
         useCases.getDirectories()
             .onEach { directories ->
                 _state.value = state.value.copy(directories = directories)
@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private suspend fun getBooks(){
+    private suspend fun getBooks() {
         useCases.getBooks()
             .onEach { books ->
                 _state.value = state.value.copy(books = books)

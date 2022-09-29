@@ -49,18 +49,22 @@ fun Greeting(name: String) {
 //Minimal example
 @Composable
 fun MinimalExampleContent() {
-    MarkdownText(markdown = """  
+    MarkdownText(
+        markdown = """  
 	# Sample  
     ## Hé title
 	* Markdown  
 	* [Link](https://example.com)  
 	![Image](https://example.com/img.png)  
 	<a href="https://www.google.com/">Google</a>  
-""")
+"""
+    )
 }
- val test = "  # Sample \n" +
+
+val test = "  # Sample \n" +
         // "## Hé title\n" +
-         " <a href=\"https://www.google.com/\">Google</a>    \n"
+        " <a href=\"https://www.google.com/\">Google</a>    \n"
+
 //Complex example
 @Composable
 fun ComplexExampleContent() {
@@ -72,7 +76,7 @@ fun ComplexExampleContent() {
         color = LocalContentColor.current,
         maxLines = 3,
         style = MaterialTheme.typography.overline,
-        )
+    )
 }
 
 @Preview(showBackground = true)

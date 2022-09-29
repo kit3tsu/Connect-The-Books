@@ -7,7 +7,7 @@ import be.bf.kit3tsu.connect_the_books.data.relations.DirectorySNote
 import be.bf.kit3tsu.connect_the_books.data.relations.DirectorySubDirectory
 import kotlinx.coroutines.flow.Flow
 
-class DirectoryRepositoryImpl(private val dao: DirectoryDao) :DirectoryRepository  {
+class DirectoryRepositoryImpl(private val dao: DirectoryDao) : DirectoryRepository {
     override suspend fun getDirectorys(): Flow<List<Directory>> {
         return dao.findAll()
     }
