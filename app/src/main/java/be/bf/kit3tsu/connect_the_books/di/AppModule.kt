@@ -14,7 +14,7 @@ import be.bf.kit3tsu.connect_the_books.core.usecases.home_uc.HomeUseCases
 import be.bf.kit3tsu.connect_the_books.core.usecases.note_uc.*
 import be.bf.kit3tsu.connect_the_books.core.usecases.shared.AddDirectory
 import be.bf.kit3tsu.connect_the_books.core.usecases.shared.AddNote
-import be.bf.kit3tsu.connect_the_books.core.usecases.shared.GetDirectories
+import be.bf.kit3tsu.connect_the_books.core.usecases.shared.GetSubDirectories
 import be.bf.kit3tsu.connect_the_books.core.usecases.shared.GetDirectory
 import be.bf.kit3tsu.connect_the_books.data.Repository.BookRepositoryImpl
 import be.bf.kit3tsu.connect_the_books.data.Repository.DirectoryRepositoryImpl
@@ -82,7 +82,7 @@ object AppModule {
             getBook = GetBook(bookRepository),
             getBooks = GetBooks(bookRepository),
             getDirectory = GetDirectory(directoryRepository),
-            getDirectories = GetDirectories(directoryRepository)
+            getDirectories = GetSubDirectories(directoryRepository)
         )
     }
 
@@ -92,7 +92,7 @@ object AppModule {
         return DirectoryUseCases(
             addDirectory = AddDirectory(repository),
             deleteDirectory = DeleteDirectory(repository),
-            getDirectories = GetDirectories(repository),
+            getDirectories = GetSubDirectories(repository),
             getDirectory = GetDirectory(repository),
             getNotes = GetNotes(repository)
         )

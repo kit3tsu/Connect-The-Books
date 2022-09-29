@@ -1,9 +1,6 @@
 package be.bf.kit3tsu.connect_the_books.core.usecases.home_uc
 
-import be.bf.kit3tsu.connect_the_books.core.usecases.shared.AddDirectory
-import be.bf.kit3tsu.connect_the_books.core.usecases.shared.AddNote
-import be.bf.kit3tsu.connect_the_books.core.usecases.shared.GetDirectories
-import be.bf.kit3tsu.connect_the_books.core.usecases.shared.GetDirectory
+import be.bf.kit3tsu.connect_the_books.core.usecases.shared.*
 
 data class HomeUseCases(
     val getBooks: GetBooks,
@@ -11,7 +8,7 @@ data class HomeUseCases(
     val addBook: AddBook,
     val addDirectory: AddDirectory,
     val addNote: AddNote,
-    val getDirectories: GetDirectories,
+    val getSubDirectories: GetSubDirectories,
     val getDirectory: GetDirectory
 ) {
 }
