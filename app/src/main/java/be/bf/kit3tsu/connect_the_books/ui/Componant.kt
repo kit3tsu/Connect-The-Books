@@ -1,8 +1,9 @@
-package be.bf.kit3tsu.connect_the_books.ui.theme
+package be.bf.kit3tsu.connect_the_books.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -10,9 +11,14 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusState
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 
@@ -33,6 +39,37 @@ fun AppButton(onClickAction: () -> Unit, text: String, navigator: DestinationsNa
 fun MyTopAppBar() {
     TopAppBar() {
 
+    }
+}
+
+@Composable
+fun TransparentHintTextField(
+    text: String,
+    hint: String,
+    modifier: Modifier = Modifier,
+    isHintVisible: Boolean = true,
+    onValueChange: (String) -> Unit,
+    textStyle: TextStyle = TextStyle(),
+    singleLine: Boolean = false,
+    onFocusChange: (FocusState) -> Unit
+) {
+    Box(
+        modifier = modifier
+    ) {
+        BasicTextField(
+            value = text,
+            onValueChange = onValueChange,
+            singleLine = singleLine,
+            textStyle = textStyle,
+            modifier = Modifier
+                .fillMaxWidth()
+                .onFocusChanged {
+                    onFocusChange(it)
+                }
+        )
+        if(isHintVisible) {
+            Text(text = hint, style = textStyle, color = Color.DarkGray)
+        }
     }
 }
 

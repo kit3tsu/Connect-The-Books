@@ -16,11 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import be.bf.kit3tsu.connect_the_books.data.entities.Note
 import be.bf.kit3tsu.connect_the_books.ui.destinations.NoteScreenDestination
 import be.bf.kit3tsu.connect_the_books.ui.library.*
 import be.bf.kit3tsu.connect_the_books.ui.library.home.DirectoryCarousel
 import be.bf.kit3tsu.connect_the_books.ui.theme.ConnectTheBooksTheme
+import be.bf.kit3tsu.connect_the_books.viewmodel.NoteViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
@@ -78,7 +80,8 @@ fun NotePreview(note: Note, navigator: DestinationsNavigator) {
         contentAlignment = Alignment.CenterStart,
         modifier = Modifier
             .padding(start = 15.dp, end = 15.dp, bottom = 15.dp)
-            .clickable { navigator.navigate(NoteScreenDestination(note)) }
+            .clickable {
+                navigator.navigate(NoteScreenDestination()) }
             .clip(CutCornerShape(topStart = 12.dp))
             .background(color = MaterialTheme.colors.primaryVariant)
             .fillMaxWidth(0.9f)

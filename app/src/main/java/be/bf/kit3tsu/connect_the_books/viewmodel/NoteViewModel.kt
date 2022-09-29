@@ -105,10 +105,10 @@ class NoteViewModel @Inject constructor(
             }
         }
     }
+    sealed class UiEvent {
+        object SaveNote : UiEvent()
+        object DeleteNote : UiEvent()
+    }
 }
 
-sealed class UiEvent {
-    //data class ShowSnackbar(val message : String):UiEvent()
-    object SaveNote : UiEvent()
-    object DeleteNote : UiEvent()
-}
+

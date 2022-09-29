@@ -27,6 +27,9 @@ import be.bf.kit3tsu.connect_the_books.ui.library.*
 import be.bf.kit3tsu.connect_the_books.ui.theme.*
 import coil.compose.rememberAsyncImagePainter
 import be.bf.kit3tsu.connect_the_books.data.entities.Book
+import be.bf.kit3tsu.connect_the_books.ui.AppSearchBar
+import be.bf.kit3tsu.connect_the_books.ui.ButtonText
+import be.bf.kit3tsu.connect_the_books.ui.MyBottomAppBar
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
