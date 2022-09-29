@@ -22,15 +22,14 @@ class NoteViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private var currentNoteId: Int? = null
-    private var currentNoteDirectory: Int= 0
+    private var currentNoteDirectory: Int = 0
     private var currentNoteVisibility: Visibility = Visibility.PUBLIC
 
     init {
-        savedStateHandle.get<Int>("noteId")?.let {
-            noteId ->
-            if(noteId != -1){
+        savedStateHandle.get<Int>("noteId")?.let { noteId ->
+            if (noteId != -1) {
                 viewModelScope.launch {
-                    useCases.getNote(noteId).collect(){ note->
+                    useCases.getNote(noteId).collect() { note ->
                         currentNoteId = note.noteId
                         currentNoteDirectory = note.parentDirectory
                         currentNoteVisibility = note.visibility
@@ -41,6 +40,7 @@ class NoteViewModel @Inject constructor(
             }
         }
     }
+
     private val _noteTitle = mutableStateOf(
         NoteState(
             hint = "Enter the title .."
@@ -59,6 +59,9 @@ class NoteViewModel @Inject constructor(
 
     fun onEvent(event: NoteEvent) {
         when (event) {
+            is NoteEvent.EnterTitle -> {
+                _noteTitle.value = noteTitle.value.copy(text = event.value)
+            }
             is NoteEvent.ChangeTitleFocus -> {
                 _noteTitle.value =
                     noteTitle.value.copy(isHintVisible = !event.focusState.isFocused && noteTitle.value.text.isBlank())
@@ -66,9 +69,6 @@ class NoteViewModel @Inject constructor(
             is NoteEvent.ChangeContentFocus -> {
                 _noteContent.value =
                     noteContent.value.copy(isHintVisible = !event.focusState.isFocused && noteContent.value.text.isBlank())
-            }
-            is NoteEvent.EnterTitle -> {
-                _noteTitle.value = noteTitle.value.copy(text = event.value)
             }
             is NoteEvent.EnterContent -> {
                 _noteContent.value = noteContent.value.copy(text = event.value)
@@ -82,7 +82,7 @@ class NoteViewModel @Inject constructor(
                             content = _noteContent.value.text,
                             visibility = currentNoteVisibility,
                             parentDirectory = currentNoteDirectory
-                        //TODO change default value
+                            //TODO change default value
                         )
                     )
                     _eventFlow.emit(UiEvent.SaveNote)
@@ -105,6 +105,7 @@ class NoteViewModel @Inject constructor(
             }
         }
     }
+
     sealed class UiEvent {
         object SaveNote : UiEvent()
         object DeleteNote : UiEvent()

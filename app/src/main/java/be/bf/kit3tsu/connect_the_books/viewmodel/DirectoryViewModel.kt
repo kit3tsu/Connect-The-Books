@@ -7,10 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import be.bf.kit3tsu.connect_the_books.core.features.directory.DirectoryEvent
 import be.bf.kit3tsu.connect_the_books.core.features.directory.DirectoryState
+import be.bf.kit3tsu.connect_the_books.core.features.note.NoteEvent
+import be.bf.kit3tsu.connect_the_books.core.features.note.NoteState
 import be.bf.kit3tsu.connect_the_books.core.usecases.directory_uc.DirectoryUseCases
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
 import be.bf.kit3tsu.connect_the_books.data.util.Visibility
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,6 +29,9 @@ class DirectoryViewModel @Inject constructor(
     private var currentDirectoryParent: Int? = null
     private var currentDirectoryTitle: String = ""
     private var currentDirectoryVisibility: Visibility = Visibility.PUBLIC
+
+    private val _eventFlow = MutableSharedFlow<DirectoryViewModel.UiEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     init {
         savedStateHandle.get<Int>("directoryId")?.let { directoryId ->
@@ -46,11 +53,37 @@ class DirectoryViewModel @Inject constructor(
     private val _state = mutableStateOf(DirectoryState())
     val state: State<DirectoryState> = _state
 
+    private val _directoryTitle = mutableStateOf(
+        DirectoryState(
+            hint = "Enter the title .."
+        )
+    )
+    val directoryTitle: State<DirectoryState> = _directoryTitle
+    private val _directoryContent = mutableStateOf(
+        DirectoryState(
+            hint = "Start your directory ..."
+        )
+    )
+
     fun onEvent(event: DirectoryEvent) {
         when (event) {
+            is DirectoryEvent.EnterTitle -> {
+                _directoryTitle.value = directoryTitle.value.copy(text = event.value)
+            }
+            is DirectoryEvent.ChangeTitleFocus -> {
+                _directoryTitle.value =
+                    directoryTitle.value.copy(isHintVisible = !event.focusState.isFocused && directoryTitle.value.text.isBlank())
+            }
             is DirectoryEvent.DeleteDirectory -> {
                 viewModelScope.launch {
-                    useCases.deleteDirectory(event.directory)
+                    useCases.deleteDirectory(
+                        Directory(
+                            directoryId = currentDirectoryId,
+                            title = currentDirectoryTitle,
+                            visibility = currentDirectoryVisibility,
+                            parentDirectory = currentDirectoryParent
+                        )
+                    )
                 }
             }
             is DirectoryEvent.AddDirectory -> {
@@ -85,10 +118,15 @@ class DirectoryViewModel @Inject constructor(
                 }
         }
     }
-//    private fun getDirectories() {
+
+    //    private fun getDirectories() {
 //         useCases.getSubDirectories().onEach {  subDirectory ->
 //             _state.value = state.value.copy(subDirectory = subDirectory)
 //         }.launchIn(viewModelScope) }
 //
 //    }
+    sealed class UiEvent {
+        object SaveDirectory : UiEvent()
+        object DeleteDirectory : UiEvent()
+    }
 }

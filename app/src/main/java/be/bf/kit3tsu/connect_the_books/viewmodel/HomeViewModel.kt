@@ -23,12 +23,14 @@ class HomeViewModel @Inject constructor(
     private val _subDirectories = mutableStateOf(HomeState.SubDirectoryHomeState())
     val subDirectories: State<HomeState.SubDirectoryHomeState> = _subDirectories
 
-    private val _search = mutableStateOf(HomeState.SearchBarHomeState(
-        hint = "Enter ISBN",
-    ))
+    private val _search = mutableStateOf(
+        HomeState.SearchBarHomeState(
+            hint = "Enter ISBN",
+        )
+    )
     val search: State<HomeState.SearchBarHomeState> = _search
 
-    private suspend fun getDirectories() {
+    private suspend fun getSubDirectories() {
         useCases.getSubDirectories()
             .onEach { subDirectory ->
                 _subDirectories.value = subDirectories.value.copy(subDirectory = subDirectory)
@@ -44,12 +46,12 @@ class HomeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun onEvent (event: HomeEvent){
-        when(event){
-            is HomeEvent.EnterIsbn ->{
+    fun onEvent(event: HomeEvent) {
+        when (event) {
+            is HomeEvent.EnterIsbn -> {
                 _search.value = search.value.copy(text = event.value)
             }
-            is HomeEvent.ChangeIsbnFocus ->{
+            is HomeEvent.ChangeIsbnFocus -> {
                 _search.value =
                     search.value.copy(isHintVisible = !event.focusState.isFocused && search.value.text.isBlank())
             }

@@ -27,7 +27,7 @@ import javax.inject.Inject
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Destination
 @Composable
-fun NoteScreen(navigator: DestinationsNavigator , viewModel: NoteViewModel = hiltViewModel()) {
+fun NoteScreen(navigator: DestinationsNavigator, viewModel: NoteViewModel = hiltViewModel()) {
     val titleState = viewModel.noteTitle.value
     val contentState = viewModel.noteContent.value
     val scaffoldState = rememberScaffoldState()
@@ -35,7 +35,7 @@ fun NoteScreen(navigator: DestinationsNavigator , viewModel: NoteViewModel = hil
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
-            when(event) {
+            when (event) {
                 is NoteViewModel.UiEvent.SaveNote -> {
                     navigator.navigateUp()
                 }
@@ -87,7 +87,7 @@ fun NoteScreen(navigator: DestinationsNavigator , viewModel: NoteViewModel = hil
                 onFocusChange = {
                     viewModel.onEvent(NoteEvent.ChangeContentFocus(it))
                 },
-                isHintVisible = titleState.isHintVisible,
+                isHintVisible = contentState.isHintVisible,
                 singleLine = false,
                 textStyle = MaterialTheme.typography.body1
             )
@@ -96,6 +96,7 @@ fun NoteScreen(navigator: DestinationsNavigator , viewModel: NoteViewModel = hil
     }
 
 }
+
 //    Column() {
 //
 //        TransparentHintTextField(

@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
 import be.bf.kit3tsu.connect_the_books.ui.destinations.EmptyDirectoryScreenDestination
 import be.bf.kit3tsu.connect_the_books.ui.destinations.EmptyNoteScreenDestination
@@ -30,6 +31,8 @@ import be.bf.kit3tsu.connect_the_books.data.entities.Book
 import be.bf.kit3tsu.connect_the_books.ui.AppSearchBar
 import be.bf.kit3tsu.connect_the_books.ui.ButtonText
 import be.bf.kit3tsu.connect_the_books.ui.MyBottomAppBar
+import be.bf.kit3tsu.connect_the_books.ui.destinations.NoteScreenDestination
+import be.bf.kit3tsu.connect_the_books.viewmodel.HomeViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
@@ -37,12 +40,12 @@ import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 @Destination(start = true)
 @Composable
 fun HomeScreen(
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator, viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val onNewDirectory = action()
-    val onNewNote = action()
-    val onSearchBook = action()
-    val directory = folders
+    val onSearchBook = action() // TODO with API
+   // val subDirectoriesState = viewModel.subDirectories.value.subDirectory.get(0).subDirectory
+    val subDirectoriesState = emptyList<Directory>()
+    val booksState = viewModel.books.value.books
     Surface(
         Modifier.fillMaxSize()
     ) {
@@ -51,21 +54,20 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             BookSearch({ onSearchBook })
-            DirectoryCarousel(directory, navigator)
-            BookCarousel(books, navigator)
+            DirectoryCarousel(subDirectoriesState, navigator)
+            BookCarousel(booksState, navigator)
             HomeButton(
-                { onNewDirectory },
-                { onNewNote },
-                navigator
+                { navigator.navigate(EmptyDirectoryScreenDestination) },
+                { navigator.navigate(NoteScreenDestination) }
             )
-            MyBottomAppBar()
+            // MyBottomAppBar()
         }
     }
 }
 
 @Composable
 fun DirectoryCarousel(
-    subDirectory: Array<Directory>,
+    subDirectory: List<Directory>,
     navigator: DestinationsNavigator
 ) {
     LazyHorizontalGrid(
@@ -81,7 +83,7 @@ fun DirectoryCarousel(
 
 @Composable
 fun BookCarousel(
-    books: Array<Book>,
+    books: List<Book>,
     navigator: DestinationsNavigator
 ) {
     LazyHorizontalGrid(
@@ -203,8 +205,7 @@ fun BookSearch(onSearchBook: () -> Unit) {
 @Composable
 fun HomeButton(
     onNewDirectory: () -> Unit,
-    onNewNote: () -> Unit,
-    navigator: DestinationsNavigator
+    onNewNote: () -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.SpaceAround,
@@ -217,16 +218,16 @@ fun HomeButton(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            NewNoteButton(onNewNote, navigator)
-            NewDirectoryButton(onNewDirectory, navigator)
+            NewNoteButton(onNewNote)
+            NewDirectoryButton(onNewDirectory)
         }
     }
 }
 
 @Composable
-fun NewDirectoryButton(onNewDirectory: () -> Unit, navigator: DestinationsNavigator) {
+fun NewDirectoryButton(onNewDirectory: () -> Unit) {
     Button(
-        onClick = { navigator.navigate(EmptyDirectoryScreenDestination) },
+        onClick = onNewDirectory,
         modifier = Modifier,
         shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
@@ -237,9 +238,9 @@ fun NewDirectoryButton(onNewDirectory: () -> Unit, navigator: DestinationsNaviga
 }
 
 @Composable
-fun NewNoteButton(onNewNote: () -> Unit, navigator: DestinationsNavigator) {
+fun NewNoteButton(onNewNote: () -> Unit) {
     Button(
-        onClick = { navigator.navigate(EmptyNoteScreenDestination) },
+        onClick = onNewNote,
         modifier = Modifier,
         shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary),
