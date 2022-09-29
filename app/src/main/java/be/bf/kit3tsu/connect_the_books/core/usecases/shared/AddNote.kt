@@ -1,4 +1,4 @@
-package be.bf.kit3tsu.connect_the_books.core.usecases.note_uc
+package be.bf.kit3tsu.connect_the_books.core.usecases.shared
 
 import be.bf.kit3tsu.connect_the_books.core.repository.NoteRepository
 import be.bf.kit3tsu.connect_the_books.data.entities.Note

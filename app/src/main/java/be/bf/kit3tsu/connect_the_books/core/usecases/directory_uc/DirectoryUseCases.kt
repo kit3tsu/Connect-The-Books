@@ -1,6 +1,10 @@
 package be.bf.kit3tsu.connect_the_books.core.usecases.directory_uc
 
-data class DirectoriesUseCases(
+import be.bf.kit3tsu.connect_the_books.core.usecases.shared.AddDirectory
+import be.bf.kit3tsu.connect_the_books.core.usecases.shared.GetDirectories
+import be.bf.kit3tsu.connect_the_books.core.usecases.shared.GetDirectory
+
+data class DirectoryUseCases(
     val addDirectory: AddDirectory,
     val deleteDirectory: DeleteDirectory,
     val getDirectories: GetDirectories,
