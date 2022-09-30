@@ -21,9 +21,9 @@ data class Book constructor(
     @ColumnInfo(name = "book_title")
     var title: String,
     @ColumnInfo(name = "book_authors")
-    var authors: String,
+    var authors: String?,
     @ColumnInfo(name = "book_isbn")
-    var isbn: String,
+    var isbn: String?,
     @ColumnInfo(name = "book_directory")
     var directory: Int
 ) : Parcelable

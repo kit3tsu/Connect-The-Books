@@ -11,20 +11,24 @@ import kotlinx.coroutines.flow.Flow
 interface DirectoryDao : BaseDao<Directory> {
 
     @Query("SELECT * FROM Directory")
-    fun findAll(): Flow<List<Directory>>
+    fun getAllDirectories(): Flow<List<Directory>>
 
     @Query("SELECT * FROM Directory where directory_id = :id")
-    fun findById(id: Int): Flow<Directory>
+    fun getDirectoryById(id: Int): Flow<Directory>
 
 //    @Query("SELECT * FROM Directory where directory_parent = 0")
 //    fun getRootDirectory():  Flow<List<Directory>>
 
     @Transaction
-    @Query("SELECT * FROM Directory")
-    fun findSubDirectory(): Flow<List<DirectorySubDirectory>>
+    @Query("SELECT * FROM Directory Where directory_parent = :id")
+    fun getDirectoriesWithSubDirectories(id: Int?): Flow<List<DirectorySubDirectory>>
 
     @Transaction
     @Query("SELECT * FROM Directory")
-    fun findDirectorySNote(): Flow<List<DirectorySNote>>
+    fun getDirectoriesWithNotes(): Flow<List<DirectorySNote>>
+
+//    @Transaction
+//    @Query("SELECT * FROM Note Where directory_id = :id")
+//    fun getNotesOfDirectory(id: Int): Flow<List<DirectorySNote>>
 
 }

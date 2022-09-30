@@ -17,4 +17,6 @@ interface NoteDao : BaseDao<Note> {
     @Query("SELECT * FROM Note")
     fun findTags(): Flow<List<NoteSTag>>
 
+
+
 }

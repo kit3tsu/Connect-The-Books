@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.Flow
 
 class BookRepositoryImpl(private val dao: BookDao):BookRepository {
     override suspend fun getBooks(): Flow<List<Book>> {
-        return dao.findAll()
+        return dao.getAllBook()
     }
 
     override suspend fun getBookById(id: Int): Flow<Book> {
-        return dao.findOneById(id)
+        return dao.getBookById(id)
     }
 
     override suspend fun insertBook(book: Book) {

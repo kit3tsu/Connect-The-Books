@@ -10,7 +10,7 @@ data class DirectorySNote(
     val directory: Directory,
     @Relation(
         parentColumn = "directory_id",
-        entityColumn = "note_directory"
+        entityColumn = "directory_id"
     )
     val notes: List<Note>
 )

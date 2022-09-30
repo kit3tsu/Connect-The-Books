@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.Flow
 interface BookDao : BaseDao<Book> {
 
     @Query("SELECT * FROM Book")
-    fun findAll(): Flow<List<Book>>
+    fun getAllBook(): Flow<List<Book>>
 
     @Query("SELECT * FROM Book WHERE book_id = :id")
-    fun findOneById(id: Int): Flow<Book>
+    fun getBookById(id: Int): Flow<Book>
 
 }

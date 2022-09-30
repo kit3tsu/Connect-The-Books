@@ -112,7 +112,7 @@ class DirectoryViewModel @Inject constructor(
 
     private fun getDirectories() {
         viewModelScope.launch {
-            useCases.getSubDirectories()
+            useCases.getSubDirectories(currentDirectoryParent)
                 .collect { subDirectory ->
                     _state.value = state.value.copy(subDirectory = subDirectory)
                 }

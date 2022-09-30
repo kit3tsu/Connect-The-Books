@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 class DirectoryRepositoryImpl(private val dao: DirectoryDao) : DirectoryRepository {
     override suspend fun getDirectories(): Flow<List<Directory>> {
-        return dao.findAll()
+        return dao.getAllDirectories()
     }
 
 //    override suspend fun getRootDirectory(): Flow<List<Directory>> {
@@ -17,7 +17,7 @@ class DirectoryRepositoryImpl(private val dao: DirectoryDao) : DirectoryReposito
 //    }
 
     override suspend fun getDirectoryById(id: Int): Flow<Directory> {
-        return dao.findById(id)
+        return dao.getDirectoryById(id)
     }
 
     override suspend fun insertDirectory(directory: Directory) {
@@ -29,10 +29,10 @@ class DirectoryRepositoryImpl(private val dao: DirectoryDao) : DirectoryReposito
     }
 
     override suspend fun getDirectorySNotes(): Flow<List<DirectorySNote>> {
-        return dao.findDirectorySNote()
+        return dao.getDirectoriesWithNotes()
     }
 
-    override suspend fun getDirectorySSubDirectories(): Flow<List<DirectorySubDirectory>> {
-        return dao.findSubDirectory()
+    override suspend fun getDirectorySSubDirectories(id: Int?): Flow<List<DirectorySubDirectory>> {
+        return dao.getDirectoriesWithSubDirectories(id)
     }
 }

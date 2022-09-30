@@ -170,7 +170,7 @@ fun BookItem(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(text = item.title, style = MaterialTheme.typography.caption)
-                    Text(text = item.authors, style = MaterialTheme.typography.caption)
+                    //Text(text = item.authors, style = MaterialTheme.typography.caption)
                 }
             }
         }

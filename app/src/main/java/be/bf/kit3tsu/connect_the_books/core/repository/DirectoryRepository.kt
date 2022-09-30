@@ -18,5 +18,5 @@ interface DirectoryRepository {
 
     suspend fun getDirectorySNotes(): Flow<List<DirectorySNote>>
 
-    suspend fun getDirectorySSubDirectories(): Flow<List<DirectorySubDirectory>>
+    suspend fun getDirectorySSubDirectories(id: Int?): Flow<List<DirectorySubDirectory>>
 }

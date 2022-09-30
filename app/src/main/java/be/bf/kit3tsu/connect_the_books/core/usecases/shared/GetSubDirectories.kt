@@ -6,8 +6,8 @@ import be.bf.kit3tsu.connect_the_books.data.relations.DirectorySubDirectory
 import kotlinx.coroutines.flow.Flow
 
 class GetSubDirectories(private val repository: DirectoryRepository) {
-    suspend operator fun invoke(): Flow<List<DirectorySubDirectory>> {
+    suspend operator fun invoke(id: Int?): Flow<List<DirectorySubDirectory>> {
         //TODO validate data before insert
-        return repository.getDirectorySSubDirectories()
+        return repository.getDirectorySSubDirectories(id)
     }
 }

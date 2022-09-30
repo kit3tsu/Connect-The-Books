@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(
     val search: State<HomeState.SearchBarHomeState> = _search
 
     private suspend fun getSubDirectories() {
-        useCases.getSubDirectories()
+        useCases.getSubDirectories(0)
             .onEach { subDirectory ->
                 _subDirectories.value = subDirectories.value.copy(subDirectory = subDirectory)
             }
