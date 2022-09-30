@@ -56,6 +56,8 @@ val DarkColors = darkColors(
     onSecondary = Magnolia,
     surface = XiketicDarker,
     onSurface = Magnolia,
+    onBackground = Magnolia,
+    onError = Magnolia,
     error = Red200
 )
 

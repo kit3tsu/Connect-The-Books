@@ -38,9 +38,9 @@ class DirectoryRepositoryImpl(private val dao: DirectoryDao) : DirectoryReposito
     }
 
     override suspend fun getRootSubDirectory(): Flow<List<Directory>> {
-//        Log.d("DirectoryRepository", "getRootSubDirectory:" + dao.getRootSubDirectory().collect{
-//            it -> it.toString()
-//        })
+        Log.d("DirectoryRepository", "getRootSubDirectory:" + dao.getRootSubDirectory().collect{
+            it -> it.toString()
+        })
         return dao.getRootSubDirectory()
     }
 }

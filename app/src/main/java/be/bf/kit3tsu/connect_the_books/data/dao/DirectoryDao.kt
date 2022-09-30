@@ -24,7 +24,7 @@ interface DirectoryDao : BaseDao<Directory> {
     @Query("SELECT * FROM Directory")
     fun getDirectoriesWithNotes(): Flow<List<DirectorySNote>>
 
-    @Query("SELECT * FROM Directory Where directory_parent is null")
+    @Query("SELECT * FROM Directory Where directory_parent is NULL")
     fun getRootSubDirectory(): Flow<List<Directory>>
 
 }

@@ -44,8 +44,8 @@ fun HomeScreen(
 ) {
     val onSearchBook = action() // TODO with API
     val states = viewModel.subDirectories.value
-    //val subDirectoriesState = folders
     val subDirectoriesState = states.subDirectory
+    //val subDirectoriesState = folders
     //val subDirectoriesState = viewModel.subDirectories.value.subDirectory
     //val subDirectoriesState = emptyList<Directory>()
     val booksState = viewModel.books.value.books

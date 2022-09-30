@@ -10,9 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import be.bf.kit3tsu.connect_the_books.R
 import be.bf.kit3tsu.connect_the_books.core.features.note.NoteEvent
 import be.bf.kit3tsu.connect_the_books.data.entities.Note
 import be.bf.kit3tsu.connect_the_books.ui.TransparentHintTextField
@@ -76,7 +82,15 @@ fun NoteScreen(navigator: DestinationsNavigator, viewModel: NoteViewModel = hilt
                     },
                     isHintVisible = titleState.isHintVisible,
                     singleLine = true,
-                    textStyle = MaterialTheme.typography.h5
+                    textStyle = TextStyle(
+                        color = MaterialTheme.colors.onSecondary, fontFamily = FontFamily(
+                            Font(R.font.montserrat_regular),
+                            Font(R.font.montserrat_medium, FontWeight.W500),
+                            Font(R.font.montserrat_semibold, FontWeight.W600)
+                        ),
+                        fontWeight = FontWeight.W600,
+                        fontSize = 24.sp
+                    )
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 TransparentHintTextField(
@@ -90,7 +104,14 @@ fun NoteScreen(navigator: DestinationsNavigator, viewModel: NoteViewModel = hilt
                     },
                     isHintVisible = contentState.isHintVisible,
                     singleLine = false,
-                    textStyle = MaterialTheme.typography.body1
+                    textStyle =TextStyle(
+                        color = MaterialTheme.colors.onSecondary, fontFamily = FontFamily(
+                            Font(R.font.domine_regular),
+                            Font(R.font.domine_bold, FontWeight.Bold)
+                        ),
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp
+                    )
                 )
             }
         }

@@ -17,9 +17,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import be.bf.kit3tsu.connect_the_books.R
 import be.bf.kit3tsu.connect_the_books.core.features.directory.DirectoryEvent
 import be.bf.kit3tsu.connect_the_books.core.features.note.NoteEvent
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
@@ -147,7 +153,15 @@ fun EmptyDirectoryScreen(
                     },
                     isHintVisible = titleState.isHintVisible,
                     singleLine = true,
-                    textStyle = MaterialTheme.typography.h4
+                    textStyle = TextStyle(
+                        color = MaterialTheme.colors.onSecondary, fontFamily = FontFamily(
+                            Font(R.font.montserrat_regular),
+                            Font(R.font.montserrat_medium, FontWeight.W500),
+                            Font(R.font.montserrat_semibold, FontWeight.W600)
+                        ),
+                        fontWeight = FontWeight.W600,
+                        fontSize = 30.sp
+                    )
                 )
             }
         }

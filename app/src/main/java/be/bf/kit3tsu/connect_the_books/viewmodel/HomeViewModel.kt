@@ -44,6 +44,7 @@ class HomeViewModel @Inject constructor(
             useCases.getRootRepository()
                 .onEach { directory ->
                     _subDirectories.value = subDirectories.value.copy(subDirectory = directory)
+                    Log.d("HomeVM", "getSubDirectories: " + subDirectories.value.subDirectory.toString())
                 }
         }
     }
