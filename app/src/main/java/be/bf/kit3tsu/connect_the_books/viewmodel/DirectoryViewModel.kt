@@ -25,9 +25,8 @@ class DirectoryViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private var currentDirectoryId: Int = -1
+    private var currentDirectoryId: Int? = null
     private var currentDirectoryParent: Int? = null
-    private var currentDirectoryTitle: String = ""
     private var currentDirectoryVisibility: Visibility = Visibility.PUBLIC
 
     private val _eventFlow = MutableSharedFlow<DirectoryViewModel.UiEvent>()
@@ -41,7 +40,7 @@ class DirectoryViewModel @Inject constructor(
                         useCases.getDirectory(directoryId).collect() { directory ->
                             currentDirectoryId = directory.directoryId
                             currentDirectoryParent = directory.parentDirectory
-                            currentDirectoryTitle = directory.title
+                            _directoryTitle.value = directoryTitle.value.copy(text = directory.title)
                             currentDirectoryVisibility = directory.visibility
                         }
                     }
@@ -65,6 +64,11 @@ class DirectoryViewModel @Inject constructor(
         )
     )
 
+    init {
+        getDirectories()
+        getNotes()
+    }
+
     fun onEvent(event: DirectoryEvent) {
         when (event) {
             is DirectoryEvent.EnterTitle -> {
@@ -79,11 +83,12 @@ class DirectoryViewModel @Inject constructor(
                     useCases.deleteDirectory(
                         Directory(
                             directoryId = currentDirectoryId,
-                            title = currentDirectoryTitle,
+                            title = _directoryTitle.value.text,
                             visibility = currentDirectoryVisibility,
                             parentDirectory = currentDirectoryParent
                         )
                     )
+                    _eventFlow.emit(UiEvent.DeleteDirectory)
                 }
             }
             is DirectoryEvent.AddDirectory -> {
@@ -91,11 +96,12 @@ class DirectoryViewModel @Inject constructor(
                     useCases.addDirectory(
                         Directory(
                             directoryId = currentDirectoryId,
-                            title = currentDirectoryTitle,
+                            title = _directoryTitle.value.text,
                             visibility = currentDirectoryVisibility,
                             parentDirectory = currentDirectoryParent
                         )
                     )
+                    _eventFlow.emit(UiEvent.SaveDirectory)
                 }
             }
         }
@@ -118,7 +124,6 @@ class DirectoryViewModel @Inject constructor(
                 }
         }
     }
-
     //    private fun getDirectories() {
 //         useCases.getSubDirectories().onEach {  subDirectory ->
 //             _state.value = state.value.copy(subDirectory = subDirectory)

@@ -21,24 +21,24 @@ import be.bf.kit3tsu.connect_the_books.data.entities.Book
 
 @Database(
     entities = [Book::class, Note::class, Tag::class, Directory::class, NoteTagCrossRef::class],
-    version = 4,
+    version = 8,
     exportSchema = false
 )
 @TypeConverters(EnumConverter::class, DateConverter::class, EntityConverters::class)
 abstract class Databases : RoomDatabase() {
-    companion object {
-        private var instance: Databases? = null
-        fun instance(context: Context): Databases {
-            if (instance == null) {
-                val room = Room
-                    .databaseBuilder(context, Databases::class.java, "app_db")
-                Log.d("Databases", "instance: $room")
-                room.allowMainThreadQueries()
-                instance = room.build()
-            }
-            return instance!!
-        }
-    }
+//    companion object {
+//        private var instance: Databases? = null
+//        fun instance(context: Context): Databases {
+//            if (instance == null) {
+//                val room = Room
+//                    .databaseBuilder(context, Databases::class.java, "app_db")
+//                Log.d("Databases", "instance: $room")
+//                room.allowMainThreadQueries()
+//                instance = room.createFromAsset("databases/app_db").build()
+//            }
+//            return instance!!
+//        }
+//    }
 
     abstract fun bookDao(): BookDao
     abstract fun noteDao(): NoteDao

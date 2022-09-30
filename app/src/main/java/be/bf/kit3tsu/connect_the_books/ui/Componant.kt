@@ -23,7 +23,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 
 @Composable
-fun AppButton(onClickAction: () -> Unit, text: String, navigator: DestinationsNavigator) {
+fun AppButton(onClickAction: () -> Unit, text: String) {
     Button(
         onClick = { onClickAction },
         modifier = Modifier,
@@ -128,7 +128,7 @@ fun IconButtonApp(imageVector: ImageVector, contentDescription: String, onClickA
 @Composable
 fun PreviewAppButton() {
     ConnectTheBooksTheme {
-        AppButton(onClickAction = { }, text = "Click Me", navigator = EmptyDestinationsNavigator)
+        AppButton(onClickAction = { }, text = "Click Me")
     }
 }
 
@@ -141,7 +141,7 @@ fun PreviewAppButton() {
 @Composable
 fun PreviewAppButtonDark() {
     ConnectTheBooksTheme {
-        AppButton(onClickAction = { }, text = "Click Me", navigator = EmptyDestinationsNavigator)
+        AppButton(onClickAction = { }, text = "Click Me")
     }
 }
 
@@ -191,7 +191,7 @@ fun PreviewDarkAppSearchBar() {
 //    name = "DefaultPreviewDark"
 //)
 //@Composable
-//fun PreviewnDark() {
+//fun PreviewDark() {
 //    ConnectTheBooksTheme {
 //
 //    }

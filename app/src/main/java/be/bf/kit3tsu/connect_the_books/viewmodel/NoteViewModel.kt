@@ -1,5 +1,6 @@
 package be.bf.kit3tsu.connect_the_books.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -22,7 +23,7 @@ class NoteViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private var currentNoteId: Int? = null
-    private var currentNoteDirectory: Int = 0
+    private var currentNoteDirectory: Int? = 1
     private var currentNoteVisibility: Visibility = Visibility.PUBLIC
 
     init {
@@ -75,6 +76,10 @@ class NoteViewModel @Inject constructor(
             }
             is NoteEvent.AddNote -> {
                 viewModelScope.launch {
+                    Log.d(
+                        "AddNote",
+                        "noteId = " + currentNoteId + ",  title = " + _noteTitle.value.text + ",  content = " + _noteContent.value.text + ", visibility = " + currentNoteVisibility + ",parentDirectory = " + currentNoteDirectory
+                    )
                     useCases.addNote(
                         Note(
                             noteId = currentNoteId,

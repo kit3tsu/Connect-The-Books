@@ -10,7 +10,8 @@ class BookRepositoryImpl(private val dao: BookDao):BookRepository {
         return dao.getAllBook()
     }
 
-    override suspend fun getBookById(id: Int): Flow<Book> {
+
+    override suspend fun getBookById(id: Int?): Flow<Book> {
         return dao.getBookById(id)
     }
 

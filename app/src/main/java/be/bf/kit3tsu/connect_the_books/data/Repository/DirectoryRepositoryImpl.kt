@@ -1,5 +1,6 @@
 package be.bf.kit3tsu.connect_the_books.data.Repository
 
+import android.util.Log
 import be.bf.kit3tsu.connect_the_books.core.repository.DirectoryRepository
 import be.bf.kit3tsu.connect_the_books.data.dao.DirectoryDao
 import be.bf.kit3tsu.connect_the_books.data.entities.Directory
@@ -16,7 +17,7 @@ class DirectoryRepositoryImpl(private val dao: DirectoryDao) : DirectoryReposito
 //        return dao.getRootDirectory()
 //    }
 
-    override suspend fun getDirectoryById(id: Int): Flow<Directory> {
+    override suspend fun getDirectoryById(id: Int?): Flow<Directory> {
         return dao.getDirectoryById(id)
     }
 
@@ -34,5 +35,12 @@ class DirectoryRepositoryImpl(private val dao: DirectoryDao) : DirectoryReposito
 
     override suspend fun getDirectorySSubDirectories(id: Int?): Flow<List<DirectorySubDirectory>> {
         return dao.getDirectoriesWithSubDirectories(id)
+    }
+
+    override suspend fun getRootSubDirectory(): Flow<List<Directory>> {
+//        Log.d("DirectoryRepository", "getRootSubDirectory:" + dao.getRootSubDirectory().collect{
+//            it -> it.toString()
+//        })
+        return dao.getRootSubDirectory()
     }
 }

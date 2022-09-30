@@ -9,6 +9,7 @@ data class HomeUseCases(
     val addDirectory: AddDirectory,
     val addNote: AddNote,
     val getSubDirectories: GetSubDirectories,
-    val getDirectory: GetDirectory
+    val getDirectory: GetDirectory,
+    val getRootRepository: GetRootRepository
 ) {
 }

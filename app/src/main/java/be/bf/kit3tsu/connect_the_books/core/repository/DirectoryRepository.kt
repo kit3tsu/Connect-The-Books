@@ -10,7 +10,7 @@ interface DirectoryRepository {
 
     //suspend fun getRootDirectory(): Flow<List<Directory>>
 
-    suspend fun getDirectoryById(id: Int): Flow<Directory>
+    suspend fun getDirectoryById(id: Int?): Flow<Directory>
 
     suspend fun insertDirectory(directory: Directory)
 
@@ -19,4 +19,6 @@ interface DirectoryRepository {
     suspend fun getDirectorySNotes(): Flow<List<DirectorySNote>>
 
     suspend fun getDirectorySSubDirectories(id: Int?): Flow<List<DirectorySubDirectory>>
+
+    suspend fun getRootSubDirectory():Flow<List<Directory>>
 }

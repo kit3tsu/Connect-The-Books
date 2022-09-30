@@ -59,39 +59,42 @@ fun NoteScreen(navigator: DestinationsNavigator, viewModel: NoteViewModel = hilt
         },
         scaffoldState = scaffoldState
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            TransparentHintTextField(
-                text = titleState.text,
-                hint = titleState.hint,
-                onValueChange = {
-                    viewModel.onEvent(NoteEvent.EnterTitle(it))
-                },
-                onFocusChange = {
-                    viewModel.onEvent(NoteEvent.ChangeTitleFocus(it))
-                },
-                isHintVisible = titleState.isHintVisible,
-                singleLine = true,
-                textStyle = MaterialTheme.typography.h5
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            TransparentHintTextField(
-                text = contentState.text,
-                hint = contentState.hint,
-                onValueChange = {
-                    viewModel.onEvent(NoteEvent.EnterContent(it))
-                },
-                onFocusChange = {
-                    viewModel.onEvent(NoteEvent.ChangeContentFocus(it))
-                },
-                isHintVisible = contentState.isHintVisible,
-                singleLine = false,
-                textStyle = MaterialTheme.typography.body1
-            )
+        Surface() {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+            ) {
+                TransparentHintTextField(
+                    text = titleState.text,
+                    hint = titleState.hint,
+                    onValueChange = {
+                        viewModel.onEvent(NoteEvent.EnterTitle(it))
+                    },
+                    onFocusChange = {
+                        viewModel.onEvent(NoteEvent.ChangeTitleFocus(it))
+                    },
+                    isHintVisible = titleState.isHintVisible,
+                    singleLine = true,
+                    textStyle = MaterialTheme.typography.h5
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                TransparentHintTextField(
+                    text = contentState.text,
+                    hint = contentState.hint,
+                    onValueChange = {
+                        viewModel.onEvent(NoteEvent.EnterContent(it))
+                    },
+                    onFocusChange = {
+                        viewModel.onEvent(NoteEvent.ChangeContentFocus(it))
+                    },
+                    isHintVisible = contentState.isHintVisible,
+                    singleLine = false,
+                    textStyle = MaterialTheme.typography.body1
+                )
+            }
         }
+
 
     }
 

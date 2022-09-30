@@ -12,7 +12,7 @@ import kotlinx.parcelize.Parcelize
 data class Directory constructor(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "directory_id")
-    var directoryId: Int = -1, @ColumnInfo(name = "directory_title")
+    var directoryId: Int? = null, @ColumnInfo(name = "directory_title")
     var title: String,
     @ColumnInfo(name = "directory_visibility")
     var visibility: Visibility,

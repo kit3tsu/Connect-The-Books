@@ -12,12 +12,12 @@ import kotlinx.parcelize.Parcelize
         entity = Directory::class,
         parentColumns = arrayOf("directory_id"),
         childColumns = arrayOf("book_directory")
-    )]
+    )],indices = [Index(value = ["book_directory"])]
 )
 data class Book constructor(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "book_id")
-    var bookId: Int = -1,
+    var bookId: Int? = null,
     @ColumnInfo(name = "book_title")
     var title: String,
     @ColumnInfo(name = "book_authors")

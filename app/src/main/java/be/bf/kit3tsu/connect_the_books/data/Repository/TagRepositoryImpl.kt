@@ -13,7 +13,7 @@ class TagRepositoryImpl(private val dao: TagDao) : TagRepository {
         return dao.findAll()
     }
 
-    override suspend fun getTagById(id: Int): Flow<Tag> {
+    override suspend fun getTagById(id: Int?): Flow<Tag> {
         return dao.findById(id)
     }
 

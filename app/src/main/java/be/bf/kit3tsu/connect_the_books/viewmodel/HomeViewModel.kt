@@ -1,5 +1,6 @@
 package be.bf.kit3tsu.connect_the_books.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -8,8 +9,10 @@ import be.bf.kit3tsu.connect_the_books.core.features.home.HomeEvent
 import be.bf.kit3tsu.connect_the_books.core.features.home.HomeState
 import be.bf.kit3tsu.connect_the_books.core.usecases.home_uc.HomeUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -22,7 +25,7 @@ class HomeViewModel @Inject constructor(
 
     private val _subDirectories = mutableStateOf(HomeState.SubDirectoryHomeState())
     val subDirectories: State<HomeState.SubDirectoryHomeState> = _subDirectories
-
+   // private var getNotesJob: Job? = null
     private val _search = mutableStateOf(
         HomeState.SearchBarHomeState(
             hint = "Enter ISBN",
@@ -30,20 +33,30 @@ class HomeViewModel @Inject constructor(
     )
     val search: State<HomeState.SearchBarHomeState> = _search
 
-    private suspend fun getSubDirectories() {
-        useCases.getSubDirectories(0)
-            .onEach { subDirectory ->
-                _subDirectories.value = subDirectories.value.copy(subDirectory = subDirectory)
-            }
-            .launchIn(viewModelScope)
+    init {
+        getSubDirectories()
+        getBooks()
+        Log.d("HomeVM", subDirectories.value.subDirectory.toString())
     }
 
-    private suspend fun getBooks() {
-        useCases.getBooks()
-            .onEach { book ->
-                _books.value = books.value.copy(books = book)
-            }
-            .launchIn(viewModelScope)
+    private fun getSubDirectories() {
+        viewModelScope.launch {
+            useCases.getRootRepository()
+                .onEach { directory ->
+                    _subDirectories.value = subDirectories.value.copy(subDirectory = directory)
+                }
+        }
+    }
+
+    private fun getBooks() {
+        //getNotesJob?.cancel()getNotesJob =
+        viewModelScope.launch {
+            useCases.getBooks()
+                .onEach { book ->
+                    _books.value = books.value.copy(books = book)
+                }.launchIn(viewModelScope)
+        }
+
     }
 
     fun onEvent(event: HomeEvent) {

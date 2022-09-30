@@ -12,6 +12,6 @@ interface BookDao : BaseDao<Book> {
     fun getAllBook(): Flow<List<Book>>
 
     @Query("SELECT * FROM Book WHERE book_id = :id")
-    fun getBookById(id: Int): Flow<Book>
+    fun getBookById(id: Int?): Flow<Book>
 
 }

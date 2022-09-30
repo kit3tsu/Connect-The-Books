@@ -13,7 +13,7 @@ interface TagDao : BaseDao<Tag> {
     fun findAll(): Flow<List<Tag>>
 
     @Query("SELECT * FROM Tag WHERE tag_id = :id")
-    fun findById(id: Int): Flow<Tag>
+    fun findById(id: Int?): Flow<Tag>
 
     @Transaction
     @Query("SELECT * FROM Tag")

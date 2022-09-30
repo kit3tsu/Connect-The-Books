@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import be.bf.kit3tsu.connect_the_books.core.features.directory.DirectoryEvent
 import be.bf.kit3tsu.connect_the_books.core.features.note.NoteEvent
+import be.bf.kit3tsu.connect_the_books.data.entities.Directory
 import be.bf.kit3tsu.connect_the_books.data.entities.Note
 import be.bf.kit3tsu.connect_the_books.ui.TransparentHintTextField
 import be.bf.kit3tsu.connect_the_books.ui.destinations.DirectoryScreenDestination
@@ -40,19 +41,18 @@ import kotlinx.coroutines.flow.collectLatest
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Destination
 @Composable
-fun DirectoryScreen(
-    directoryId: Int,
+fun DirectoryScreen(directory: Directory? = null,
     navigator: DestinationsNavigator,
     viewModel: DirectoryViewModel = hiltViewModel()
 ) {
-    val notesState = viewModel.state.value.notes.get(0).notes
-    val subDirectoryState = viewModel.state.value.subDirectory.get(0).subDirectory
+    val notesState = viewModel.state.value.notes[0].notes
+    val subDirectoryState = viewModel.state.value.subDirectory[0].subDirectory
     val scaffoldState = rememberScaffoldState()
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
                 is DirectoryViewModel.UiEvent.SaveDirectory -> {
-                    navigator.navigate(DirectoryScreenDestination(-1))
+                    navigator.navigate(DirectoryScreenDestination())
                 }
                 is DirectoryViewModel.UiEvent.DeleteDirectory -> {
                     navigator.navigateUp()
@@ -73,23 +73,26 @@ fun DirectoryScreen(
         },
         scaffoldState = scaffoldState
     ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            DirectoryCarousel(subDirectoryState, navigator)
-            LazyColumn(
-                contentPadding = PaddingValues(start = 8.dp, end = 8.dp),
-                modifier = Modifier.height(360.dp)
+        Surface() {
+            Column(
+                verticalArrangement = Arrangement.SpaceAround,
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                items(items = notesState) { note ->
-                    NotePreview(note = note, navigator)
+                DirectoryCarousel(subDirectoryState, navigator)
+                LazyColumn(
+                    contentPadding = PaddingValues(start = 8.dp, end = 8.dp),
+                    modifier = Modifier.height(360.dp)
+                ) {
+                    items(items = notesState) { note ->
+                        NotePreview(note = note, navigator)
+                    }
                 }
-            }
-            BottomAppBar() {
-
+//            BottomAppBar() {
+//
+//            }
             }
         }
+
     }
 }
 
@@ -106,7 +109,8 @@ fun EmptyDirectoryScreen(
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
                 is DirectoryViewModel.UiEvent.SaveDirectory -> {
-                    navigator.navigate(DirectoryScreenDestination(-1))
+                    navigator.navigateUp()
+                    //navigator.navigate(DirectoryScreenDestination())
                 }
                 is DirectoryViewModel.UiEvent.DeleteDirectory -> {
                     navigator.navigateUp()
@@ -127,24 +131,27 @@ fun EmptyDirectoryScreen(
         },
         scaffoldState = scaffoldState
     ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            TransparentHintTextField(
-                text = titleState.text,
-                hint = titleState.hint,
-                onValueChange = {
-                    viewModel.onEvent(DirectoryEvent.EnterTitle(it))
-                },
-                onFocusChange = {
-                    viewModel.onEvent(DirectoryEvent.ChangeTitleFocus(it))
-                },
-                isHintVisible = titleState.isHintVisible,
-                singleLine = true,
-                textStyle = MaterialTheme.typography.h5
-            )
+        Surface(modifier = Modifier.fillMaxSize()) {
+            Column(
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                TransparentHintTextField(
+                    text = titleState.text,
+                    hint = titleState.hint,
+                    onValueChange = {
+                        viewModel.onEvent(DirectoryEvent.EnterTitle(it))
+                    },
+                    onFocusChange = {
+                        viewModel.onEvent(DirectoryEvent.ChangeTitleFocus(it))
+                    },
+                    isHintVisible = titleState.isHintVisible,
+                    singleLine = true,
+                    textStyle = MaterialTheme.typography.h4
+                )
+            }
         }
+
     }
 }
 
@@ -168,7 +175,7 @@ fun NotePreview(note: Note, navigator: DestinationsNavigator) {
             modifier = Modifier.fillMaxWidth(1f)
         ) {
             Text(text = note.title, style = MaterialTheme.typography.subtitle1)
-            //Text(text = note.description, style = MaterialTheme.typography.body2)
+            Text(text = note.content, style = MaterialTheme.typography.body2, maxLines = 1)
         }
     }
 }
@@ -188,7 +195,7 @@ fun NotePreviewPreview() {
 fun DirectoryScreenPreview() {
     ConnectTheBooksTheme {
         Column() {
-            DirectoryScreen(1, navigator = EmptyDestinationsNavigator)
+            DirectoryScreen( navigator = EmptyDestinationsNavigator)
         }
     }
 }

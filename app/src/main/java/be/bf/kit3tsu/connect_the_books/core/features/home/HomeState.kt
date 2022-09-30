@@ -15,7 +15,7 @@ import be.bf.kit3tsu.connect_the_books.data.relations.DirectorySubDirectory
 
 sealed class HomeState {
     data class BookHomeState(val books: List<Book> = emptyList() ) : HomeState()
-    data class SubDirectoryHomeState( val subDirectory: List<DirectorySubDirectory> = emptyList() ) : HomeState()
+    data class SubDirectoryHomeState( val subDirectory: List<Directory> = emptyList() ) : HomeState()
     data class SearchBarHomeState(    val text:String = "",
                                       val hint:String = "",
                                       val isHintVisible : Boolean = true ) : HomeState()

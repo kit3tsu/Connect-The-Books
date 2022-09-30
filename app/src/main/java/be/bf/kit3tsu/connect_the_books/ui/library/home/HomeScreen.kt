@@ -43,8 +43,11 @@ fun HomeScreen(
     navigator: DestinationsNavigator, viewModel: HomeViewModel = hiltViewModel()
 ) {
     val onSearchBook = action() // TODO with API
-   // val subDirectoriesState = viewModel.subDirectories.value.subDirectory.get(0).subDirectory
-    val subDirectoriesState = emptyList<Directory>()
+    val states = viewModel.subDirectories.value
+    //val subDirectoriesState = folders
+    val subDirectoriesState = states.subDirectory
+    //val subDirectoriesState = viewModel.subDirectories.value.subDirectory
+    //val subDirectoriesState = emptyList<Directory>()
     val booksState = viewModel.books.value.books
     Surface(
         Modifier.fillMaxSize()
@@ -108,7 +111,7 @@ fun DirectoryItem(
         modifier = modifier
             .padding(all = 6.dp)
             .aspectRatio(1.25f, matchHeightConstraintsFirst = true)
-            .clickable { navigator.navigate(DirectoryScreenDestination(item.directoryId)) },// TODO Add navigation
+            .clickable { navigator.navigate(DirectoryScreenDestination(item)) },// TODO Add navigation
         shape = MaterialTheme.shapes.medium,
         backgroundColor = MaterialTheme.colors.primary,
         elevation = 2.dp,
@@ -145,7 +148,7 @@ fun BookItem(
             .aspectRatio(0.8f, matchHeightConstraintsFirst = true)
             .height(150.dp)
             .clickable {
-                navigator.navigate(DirectoryScreenDestination(item.directory))
+                navigator.navigate(DirectoryScreenDestination())
             },// TODO Add navigation,
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.primaryVariant,
@@ -269,7 +272,7 @@ fun NewNoteButton(onNewNote: () -> Unit) {
 @Composable
 fun PreviewHomeScreen() {
     ConnectTheBooksTheme {
-        //HomeScreen(directory = Directorys, onNewDirectory = { }, onNewNote = { }, {})
+        //HomeScreen(directory = Directories, onNewDirectory = { }, onNewNote = { }, {})
     }
 }
 
@@ -282,7 +285,7 @@ fun PreviewHomeScreen() {
 @Composable
 fun PreviewDarkHomeScreen() {
     ConnectTheBooksTheme {
-        //HomeScreen(directory = Directorys, onNewDirectory = { }, onNewNote = { }, {}, )
+        //HomeScreen(directory = Directories, onNewDirectory = { }, onNewNote = { }, {}, )
     }
 }
 

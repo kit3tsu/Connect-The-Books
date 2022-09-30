@@ -11,7 +11,7 @@ interface NoteDao : BaseDao<Note> {
     fun findAll(): Flow<List<Note>>
 
     @Query("SELECT * FROM Note WHERE note_id = :id")
-    fun findOneById(id: Int): Flow<Note>
+    fun findOneById(id: Int?): Flow<Note>
 
     @Transaction
     @Query("SELECT * FROM Note")

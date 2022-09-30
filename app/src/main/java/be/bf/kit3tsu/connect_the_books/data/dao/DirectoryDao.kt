@@ -14,10 +14,7 @@ interface DirectoryDao : BaseDao<Directory> {
     fun getAllDirectories(): Flow<List<Directory>>
 
     @Query("SELECT * FROM Directory where directory_id = :id")
-    fun getDirectoryById(id: Int): Flow<Directory>
-
-//    @Query("SELECT * FROM Directory where directory_parent = 0")
-//    fun getRootDirectory():  Flow<List<Directory>>
+    fun getDirectoryById(id: Int?): Flow<Directory>
 
     @Transaction
     @Query("SELECT * FROM Directory Where directory_parent = :id")
@@ -27,8 +24,7 @@ interface DirectoryDao : BaseDao<Directory> {
     @Query("SELECT * FROM Directory")
     fun getDirectoriesWithNotes(): Flow<List<DirectorySNote>>
 
-//    @Transaction
-//    @Query("SELECT * FROM Note Where directory_id = :id")
-//    fun getNotesOfDirectory(id: Int): Flow<List<DirectorySNote>>
+    @Query("SELECT * FROM Directory Where directory_parent is null")
+    fun getRootSubDirectory(): Flow<List<Directory>>
 
 }

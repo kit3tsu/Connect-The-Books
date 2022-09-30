@@ -7,7 +7,7 @@ import be.bf.kit3tsu.connect_the_books.data.entities.Tag
 import be.bf.kit3tsu.connect_the_books.data.util.Visibility
 import be.bf.kit3tsu.connect_the_books.data.entities.Book
 
-val folders = arrayOf(
+val folders = listOf<Directory>(
     Directory(0, "Home", Visibility.PUBLIC, null),
     Directory(1, "Organisation", Visibility.PUBLIC, 0),
     Directory(2, "Pirates", Visibility.PUBLIC, 1),

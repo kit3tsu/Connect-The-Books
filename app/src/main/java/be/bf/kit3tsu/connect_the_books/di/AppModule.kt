@@ -1,16 +1,15 @@
 package be.bf.kit3tsu.connect_the_books.di
 
 import android.app.Application
+import android.util.Log
+import androidx.room.Room
 import be.bf.kit3tsu.connect_the_books.core.repository.BookRepository
 import be.bf.kit3tsu.connect_the_books.core.repository.DirectoryRepository
 import be.bf.kit3tsu.connect_the_books.core.repository.NoteRepository
 import be.bf.kit3tsu.connect_the_books.core.usecases.directory_uc.DeleteDirectory
 import be.bf.kit3tsu.connect_the_books.core.usecases.directory_uc.DirectoryUseCases
 import be.bf.kit3tsu.connect_the_books.core.usecases.directory_uc.GetNotes
-import be.bf.kit3tsu.connect_the_books.core.usecases.home_uc.AddBook
-import be.bf.kit3tsu.connect_the_books.core.usecases.home_uc.GetBook
-import be.bf.kit3tsu.connect_the_books.core.usecases.home_uc.GetBooks
-import be.bf.kit3tsu.connect_the_books.core.usecases.home_uc.HomeUseCases
+import be.bf.kit3tsu.connect_the_books.core.usecases.home_uc.*
 import be.bf.kit3tsu.connect_the_books.core.usecases.note_uc.*
 import be.bf.kit3tsu.connect_the_books.core.usecases.shared.AddDirectory
 import be.bf.kit3tsu.connect_the_books.core.usecases.shared.AddNote
@@ -33,10 +32,11 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabases(app: Application): Databases {
-//        return Room.databaseBuilder(
-//            app,Databases::class.java,"app_db"
-//        ).build
-        return Databases.instance(app.applicationContext)
+        Log.d("Databases", "instance: db done")
+        return Room.databaseBuilder(
+            app,Databases::class.java,"app_db"
+        ).allowMainThreadQueries().build()
+//        return Databases.instance(app.applicationContext).createFromAsset("databases/app_db")
     }
 
     @Provides
@@ -82,7 +82,8 @@ object AppModule {
             getBook = GetBook(bookRepository),
             getBooks = GetBooks(bookRepository),
             getDirectory = GetDirectory(directoryRepository),
-            getSubDirectories = GetSubDirectories(directoryRepository)
+            getSubDirectories = GetSubDirectories(directoryRepository),
+            getRootRepository = GetRootRepository(directoryRepository)
         )
     }
 

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface TagRepository {
     suspend fun getTags(): Flow<List<Tag>>
 
-    suspend fun getTagById(id: Int): Flow<Tag>
+    suspend fun getTagById(id: Int?): Flow<Tag>
 
     suspend fun insertTag(tag: Tag)
 
