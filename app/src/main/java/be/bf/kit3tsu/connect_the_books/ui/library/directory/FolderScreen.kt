@@ -1,15 +1,13 @@
 package be.bf.kit3tsu.connect_the_books.ui.library.directory
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +24,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Destination
 @Composable
 fun FolderScreen(
@@ -34,24 +33,27 @@ fun FolderScreen(
 ) {
     val noteList  = getNotesList(folderId)
     val subFolder = getSubFoldersList(folderId)
-    Surface() {
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            FolderCarousel(subFolder, navigator)
-            LazyColumn(
-                contentPadding = PaddingValues(start = 8.dp,end = 8.dp),
-                 modifier = Modifier.height(360.dp)) {
-                items(items = noteList) { note ->
-                    NotePreview(note = note,navigator)
+    Scaffold() {
+        Surface() {
+            Column(
+                verticalArrangement = Arrangement.SpaceAround,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                FolderCarousel(subFolder, navigator)
+                LazyColumn(
+                    contentPadding = PaddingValues(start = 8.dp,end = 8.dp),
+                    modifier = Modifier.fillMaxHeight()) {
+                    items(items = noteList) { note ->
+                        NotePreview(note = note,navigator)
+                    }
                 }
-            }
-            BottomAppBar() {
+                BottomAppBar() {
 
+                }
             }
         }
     }
+
 }
 @Destination
 @Composable

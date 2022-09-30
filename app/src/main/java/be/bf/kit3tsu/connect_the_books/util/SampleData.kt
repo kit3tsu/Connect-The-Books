@@ -40,6 +40,12 @@ val notes = arrayOf(
     Note(7,"Les amiraux","Ils sont tres tres différents","/c/docu/app", Visibility.PUBLIC,3),
     Note(7,"Aokiji","De la glace","/c/docu/app", Visibility.PUBLIC,7),
     Note(7,"Akainu","FDD Manma","/c/docu/app", Visibility.PUBLIC,7),
+    Note(7,"Kizaru","FDD Luniere","/c/docu/app", Visibility.PUBLIC,7),Note(4,"Les Mugiwara","Ils sont tres tres gentil","/c/docu/app", Visibility.PUBLIC,2),
+    Note(5,"Les Heart Pirates","Ils sont sympa","/c/docu/app", Visibility.PUBLIC,2),
+    Note(6,"Les Roks","Ils sont tres tres mais vrmt bcp méchant","/c/docu/app", Visibility.PUBLIC,2),
+    Note(7,"Les amiraux","Ils sont tres tres différents","/c/docu/app", Visibility.PUBLIC,3),
+    Note(7,"Aokiji","De la glace","/c/docu/app", Visibility.PUBLIC,7),
+    Note(7,"Akainu","FDD Manma","/c/docu/app", Visibility.PUBLIC,7),
     Note(7,"Kizaru","FDD Luniere","/c/docu/app", Visibility.PUBLIC,7),
 )
 fun getNotesList(folderId : Int) = notes
